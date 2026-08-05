@@ -26,8 +26,8 @@ export const VARIANTS = {
     path: "/b",
     name: "Versão B",
     positioning:
-      "Objetiva — a contabilidade em si vem primeiro. Ainda não implementada.",
-    status: "reserved",
+      "Objetiva — página de serviço. O que fazemos, para quem e como começar.",
+    status: "ready",
     indexable: false,
   },
 } as const;

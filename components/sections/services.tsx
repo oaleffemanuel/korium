@@ -69,12 +69,13 @@ export function Services() {
 
         <Reveal delay={0.1} className="mt-14">
           <p className="max-w-[58ch] text-[1.0625rem] leading-relaxed text-ink-3">
-            Se o seu contador atual faz tudo isso e ainda responde no mesmo dia,
-            fique com ele — falo sério.{" "}
+            Se o seu contador atual faz tudo isso e ainda responde em poucos
+            minutos, fique com ele — falo sério.{" "}
             <span className="text-ink">
-              Só que, pela nossa experiência, provavelmente não é o seu caso
-            </span>{" "}
-            — senão você não teria chegado até aqui.
+              Só que, se fosse esse o caso, você provavelmente não teria chegado
+              até aqui
+            </span>
+            .
           </p>
         </Reveal>
       </div>

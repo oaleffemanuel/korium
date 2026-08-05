@@ -11,7 +11,7 @@ const SOLD = [
 
 const WANTED = [
   "Saber que está tudo certo sem precisar perguntar",
-  "Resposta no mesmo dia, com prazo",
+  "Resposta em até 10 minutos no horário comercial",
   "Não precisar lembrar de nada sozinho",
   "Ser avisado antes, e não depois da multa",
   "Fim de mês sem nenhuma surpresa",

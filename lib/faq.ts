@@ -13,11 +13,11 @@ export const FAQ_ITEMS = [
   },
   {
     q: "Como funciona a comunicação no dia a dia?",
-    a: "Você fala direto com pessoas que têm nome, e não com um número de protocolo numa fila de atendimento. Toda mensagem tem retorno em até um dia útil e, na prática, quase sempre no mesmo dia. Quando o assunto é mais longo, a gente marca uma chamada em vez de trocar vinte mensagens soltas.",
+    a: "Você fala direto com pessoas que têm nome, e não com um número de protocolo numa fila de atendimento. Nosso compromisso é responder em até 10 minutos durante o horário comercial, e quando o assunto é mais longo a gente marca uma chamada em vez de trocar vinte mensagens soltas.",
   },
   {
     q: "Dá para fazer tudo à distância?",
-    a: "Sim, do primeiro contato à assinatura do contrato e ao envio de documentos, tudo pode ser resolvido a distância, com assinatura eletrônica válida e histórico organizado. Atendemos empresas em todo o Brasil e boa parte dos nossos clientes nunca precisou aparecer aqui.",
+    a: "Sim, do primeiro contato à assinatura do contrato e ao envio de documentos, tudo pode ser resolvido a distância, com assinatura eletrônica válida e histórico organizado. Atendemos empresas em todo o Brasil, e nenhuma etapa depende de você aparecer aqui.",
   },
   {
     q: "Preciso visitar o escritório de vocês?",

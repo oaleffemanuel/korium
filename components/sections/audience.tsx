@@ -50,7 +50,7 @@ export function Audience() {
         <SectionHeading
           eyebrow="Para quem"
           title="Empresas que já passaram da fase de improvisar."
-          lede="Se a sua empresa já fatura e já tem contador, você está exatamente no ponto em que essa conversa costuma valer a pena — porque aí o problema deixa de ser preço e passa a ser confiança."
+          lede="Se a sua empresa já fatura e já tem contador, você está exatamente no ponto em que essa conversa vale a pena — porque aí o problema deixa de ser preço e passa a ser confiança."
         />
 
         <Stagger className="mt-20 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

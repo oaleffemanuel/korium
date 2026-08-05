@@ -1,9 +1,13 @@
+import type * as React from "react";
 import { ArrowUpRight } from "lucide-react";
 
 import { KMark } from "@/components/site/logo";
 import { externalLinkProps, site, whatsappLink } from "@/lib/site";
 
-const NAV = [
+import type { NavLink } from "@/components/site/nav";
+
+/** Version A's sections. Variants with a different outline pass their own. */
+const DEFAULT_LINKS: NavLink[] = [
   { label: "O problema", href: "#dor" },
   { label: "A Korium", href: "#solucao" },
   { label: "Serviços", href: "#servicos" },
@@ -13,16 +17,27 @@ const NAV = [
   { label: "Perguntas", href: "#perguntas" },
 ];
 
-export function Footer() {
+/** Version A's sign-off. Variants that close on a different note pass their own. */
+const DEFAULT_SIGN_OFF = (
+  <p className="serif mt-7 max-w-[26ch] text-[1.375rem] leading-snug text-ink">
+    Enquanto você cuida da empresa, a gente cuida da contabilidade.
+  </p>
+);
+
+export function Footer({
+  links = DEFAULT_LINKS,
+  signOff = DEFAULT_SIGN_OFF,
+}: {
+  links?: NavLink[];
+  signOff?: React.ReactNode;
+}) {
   return (
     <footer className="border-t border-line bg-canvas">
       <div className="container-k">
         <div className="grid gap-12 py-20 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1fr)] md:py-24">
           <div>
             <KMark className="size-8 text-ink" />
-            <p className="serif mt-7 max-w-[26ch] text-[1.375rem] leading-snug text-ink">
-              Enquanto você cuida da empresa, a gente cuida da contabilidade.
-            </p>
+            {signOff}
           </div>
 
           <nav aria-label="Rodapé">
@@ -30,7 +45,7 @@ export function Footer() {
               Navegação
             </p>
             <ul className="mt-6 flex flex-col gap-3.5">
-              {NAV.map((item) => (
+              {links.map((item) => (
                 <li key={item.href}>
                   <a
                     href={item.href}
@@ -77,7 +92,7 @@ export function Footer() {
               {...externalLinkProps}
               className="mt-8 inline-flex items-center gap-2 text-[0.9375rem] text-ink underline decoration-[rgb(var(--gold))] decoration-1 underline-offset-4 transition-colors duration-300 hover:text-[rgb(var(--gold))]"
             >
-              Falar com o dono
+              Falar com a Korium
             </a>
           </div>
         </div>

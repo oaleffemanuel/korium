@@ -72,10 +72,9 @@ export function Hero() {
             transition={{ duration: 0.9, delay: 0.5, ease: EASE }}
             className="text-lede mx-auto mt-10 max-w-[52ch] text-ink-2"
           >
-            Você abriu uma empresa para tocar um negócio, não para ficar cobrando
-            resposta de quem já recebe para dar. Aqui o acordo é simples: enquanto
-            você cuida da empresa, a gente cuida da contabilidade — e você fica
-            sabendo de tudo sem precisar perguntar.
+            Seu contador deveria responder quando você precisa, não quando ele
+            consegue. Na Korium o compromisso é responder em até 10 minutos
+            durante o horário comercial, para você seguir cuidando da empresa.
           </motion.p>
 
           <motion.div
@@ -89,7 +88,7 @@ export function Hero() {
               size="lg"
               className="w-full sm:w-auto"
             >
-              Falar com o dono
+              Falar com a Korium
             </WhatsAppCta>
             <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
               <a href="#como-funciona">Ver como funciona</a>

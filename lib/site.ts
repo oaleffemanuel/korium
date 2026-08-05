@@ -5,11 +5,11 @@ export const site = {
   url: "https://korium.co",
   tagline: "Nunca mais corra atrás do seu contador.",
   description:
-    "Contabilidade para quem quer menos burocracia e mais tranquilidade. Enquanto você cuida da empresa, a Korium cuida da contabilidade — com resposta no mesmo dia e a troca de contador feita por nós.",
+    "Contabilidade para quem quer menos burocracia e mais tranquilidade. Enquanto você cuida da empresa, a Korium cuida da contabilidade — com resposta em até 10 minutos durante o horário comercial e a troca de contador feita por nós.",
   email: "aleff@korium.co",
   /** Human-readable form, for display only. */
   phone: "+55 31 97596-5032",
-  serviceArea: "Atendemos empresas em todo o Brasil",
+  serviceArea: "Atendimento em todo o Brasil",
 } as const;
 
 /* ------------------------------------------------------------------
@@ -27,7 +27,7 @@ export const WHATSAPP_NUMBER = "5531975965032";
 export const WHATSAPP_MESSAGES = {
   default:
     "Olá! Vi o site da Korium e gostaria de conversar sobre a contabilidade da minha empresa.",
-  dono: "Olá! Vi o site da Korium e gostaria de conversar com o dono sobre a contabilidade da minha empresa.",
+  dono: "Olá! Vi o site da Korium e gostaria de conversar sobre a contabilidade da minha empresa.",
   investimento:
     "Olá! Vi o site da Korium e gostaria de entender qual seria o investimento no caso da minha empresa.",
   duvida:

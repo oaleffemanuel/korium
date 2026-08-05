@@ -61,7 +61,8 @@ canônica para a variante ativa.
 
 ## Experimento 001 — Emoção x objetividade
 
-**Status:** Versão A no ar, Versão B reservada.
+**Status:** Versão A no ar, Versão B implementada e pronta para receber
+tráfego.
 **Aberto em:** 05/08/2026.
 
 ### Hipótese
@@ -90,26 +91,38 @@ Posicionamento atual, no ar.
 - **Conversão:** exclusivamente WhatsApp, sem formulário. CTA principal
   "Falar com o dono".
 
-### Versão B — objetiva, contabilidade primeiro `/b`
+### Versão B — página de serviço `/b`
 
-Reservada. **Ainda não implementada** — a rota existe e hoje renderiza a
-Versão A de propósito, para que a medição possa ser montada antes da escrita.
+Implementada. Onde A defende um ponto de vista, B responde a pergunta de quem
+já está procurando contador: o que vocês fazem, para quem, como funciona e
+como eu começo.
 
-Direção pretendida quando for construída:
+- **Manchete:** "Quase ninguém troca de contador por causa de imposto" — abre
+  uma curiosidade e resolve no subtítulo, em vez de nomear a dor de saída.
+- **Abertura:** para quem atendemos, logo seguido do que fazemos.
+- **Ordem do argumento:** para quem → serviços → comparação → como funciona →
+  o que está incluído → perguntas → contato.
+- **Papel dos serviços:** sobem para o topo e viram checklist objetivo, sem os
+  parágrafos longos de A e sem o enquadramento de "isso é só o mínimo".
+- **Peça nova:** bloco de comparação lado a lado, focado em experiência de
+  atendimento e não em competência técnica.
+- **Perguntas:** cinco, todas de objeção (troca, deslocamento, preço, porte,
+  atendimento), contra nove em A.
+- **Conversão:** a mesma — WhatsApp, mesmo CTA "Falar com o dono", para não
+  contaminar a comparação.
 
-- **Promessa:** competência e domínio técnico como argumento principal.
-- **Abertura:** o que a Korium faz e para quem, sem passar pela frustração.
-- **Serviços:** sobem para perto do topo e deixam de ser tratados como mínimo.
-- **Prova:** regimes tributários, especialização por segmento, rigor de
-  processo.
-- **Conversão:** a mesma — WhatsApp, mesmos textos de CTA, para não contaminar
-  a comparação.
+Arquivos em `components/sections/b/`, compostos por
+`components/variants/version-b.tsx`. Nada é compartilhado com A além do design
+system e da casca (nav, rodapé, botão flutuante), então as duas podem divergir
+à vontade.
 
 ### O que precisa ser igual nas duas
 
 Para que a diferença medida seja de posicionamento e não de outra coisa:
 identidade visual, tipografia, espaçamento, animações, canal de conversão,
-textos dos botões e ausência de preço.
+textos dos botões e ausência de preço. Tudo isso está mantido — as duas usam
+os mesmos componentes de `components/ui` e `components/site`, o mesmo helper
+de WhatsApp e o mesmo bloco de investimento borrado.
 
 ### Como medir
 

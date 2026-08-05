@@ -1,8 +1,11 @@
 import { FAQ_ITEMS } from "@/lib/faq";
 import { site, WHATSAPP_NUMBER } from "@/lib/site";
 
-/** Shared across every variant — the business does not change between tests. */
-export function buildJsonLd() {
+/**
+ * Shared across every variant — the business does not change between tests.
+ * Only the FAQ differs, since each variant answers objections in its own way.
+ */
+export function buildJsonLd(faqItems: readonly { q: string; a: string }[] = FAQ_ITEMS) {
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -30,7 +33,7 @@ export function buildJsonLd() {
       {
         "@type": "FAQPage",
         "@id": `${site.url}#perguntas`,
-        mainEntity: FAQ_ITEMS.map((item) => ({
+        mainEntity: faqItems.map((item) => ({
           "@type": "Question",
           name: item.q,
           acceptedAnswer: { "@type": "Answer", text: item.a },

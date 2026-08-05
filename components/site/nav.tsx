@@ -8,15 +8,18 @@ import { Wordmark } from "@/components/site/logo";
 import { WhatsAppCta } from "@/components/site/whatsapp-cta";
 import { cn } from "@/lib/utils";
 
-const LINKS = [
+export type NavLink = { label: string; href: string };
+
+/** Version A's sections. Variants with a different outline pass their own. */
+const DEFAULT_LINKS: NavLink[] = [
   { label: "O problema", href: "#dor" },
   { label: "Como funciona", href: "#como-funciona" },
   { label: "Serviços", href: "#servicos" },
   { label: "O que está incluído", href: "#incluido" },
   { label: "Perguntas", href: "#perguntas" },
-] as const;
+];
 
-export function Nav() {
+export function Nav({ links = DEFAULT_LINKS }: { links?: NavLink[] }) {
   const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const { scrollY } = useScroll();
@@ -70,7 +73,7 @@ export function Nav() {
             </a>
 
             <nav className="hidden items-center gap-1 lg:flex" aria-label="Principal">
-              {LINKS.map((link) => (
+              {links.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
@@ -115,7 +118,7 @@ export function Nav() {
             className="fixed inset-0 z-40 bg-canvas px-6 pt-28 lg:hidden"
           >
             <nav className="flex flex-col" aria-label="Menu móvel">
-              {LINKS.map((link, i) => (
+              {links.map((link, i) => (
                 <motion.a
                   key={link.href}
                   href={link.href}

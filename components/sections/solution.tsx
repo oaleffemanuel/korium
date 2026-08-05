@@ -7,7 +7,7 @@ const PILLARS = [
   {
     icon: MessageSquareText,
     title: "Você pergunta, a gente responde",
-    body: "Toda mensagem tem retorno em até um dia útil, e na prática quase sempre no mesmo dia. Isso não é um discurso de atendimento: está escrito no contrato, para você poder cobrar se um dia falharmos.",
+    body: "Toda mensagem tem resposta em até 10 minutos durante o horário comercial. Isso não é um discurso de atendimento: está escrito no contrato, para você poder cobrar se um dia falharmos.",
   },
   {
     icon: FolderCheck,
