@@ -300,6 +300,22 @@
   animation: k-pulse 2.6s var(--ease-out-expo) infinite;
 }
 
+/* Gentle scroll cue — a few pixels of drift, nothing more. The global
+   prefers-reduced-motion block above already disables it. */
+@keyframes k-float {
+  0%,
+  100% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+.animate-k-float {
+  animation: k-float 2.6s ease-in-out infinite;
+}
+
 /* Accordion */
 @keyframes k-accordion-down {
   from {

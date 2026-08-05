@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { LineReveal } from "@/components/motion/reveal";
@@ -21,7 +21,7 @@ export function HeroB() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden pb-28 pt-32 md:pb-36 md:pt-40 lg:pb-44 lg:pt-48"
+      className="relative overflow-hidden pb-10 pt-28 md:pt-32"
     >
       <div
         aria-hidden
@@ -104,6 +104,25 @@ export function HeroB() {
               </span>
             ))}
           </motion.p>
+
+          {/* Scroll cue — the hero ends above the fold, so this says so. */}
+          <motion.div
+            initial={reduce ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.9, delay: 0.95, ease: EASE }}
+            className="mt-8 flex justify-center"
+          >
+            <a
+              href="#para-quem"
+              aria-label="Continuar para a próxima seção"
+              className="group/cue inline-flex flex-col items-center gap-2 rounded-md py-1 text-ink-4 transition-colors duration-500 hover:text-[rgb(var(--gold))]"
+            >
+              <span className="text-[0.625rem] font-medium uppercase tracking-[0.22em]">
+                Continue
+              </span>
+              <ChevronDown className="animate-k-float size-4" aria-hidden />
+            </a>
+          </motion.div>
         </div>
       </div>
     </section>
