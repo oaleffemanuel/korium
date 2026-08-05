@@ -1,0 +1,93 @@
+import {
+  Building2,
+  Code2,
+  Briefcase,
+  Stethoscope,
+  Store,
+  HeartPulse,
+} from "lucide-react";
+
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
+import { Section, SectionHeading } from "@/components/site/section";
+
+const AUDIENCE = [
+  {
+    icon: Stethoscope,
+    title: "Médicos",
+    body: "Pró-labore, PJ e declaração pessoal finalmente falando a mesma língua.",
+  },
+  {
+    icon: HeartPulse,
+    title: "Clínicas",
+    body: "Equiparação hospitalar e sócios, na rotina de quem atende paciente o dia inteiro.",
+  },
+  {
+    icon: Code2,
+    title: "Empresas de tecnologia",
+    body: "Contratação PJ, receita recorrente e faturamento que às vezes vem de fora.",
+  },
+  {
+    icon: Briefcase,
+    title: "Prestadores de serviço",
+    body: "Consultorias, agências e escritórios em que o faturamento muda todo mês.",
+  },
+  {
+    icon: Building2,
+    title: "Pequenas empresas",
+    body: "Time enxuto, sócio metido em tudo e nenhum tempo sobrando para burocracia.",
+  },
+  {
+    icon: Store,
+    title: "Comércio local",
+    body: "Estoque, substituição tributária e vendas conferidas uma a uma, de verdade.",
+  },
+];
+
+export function Audience() {
+  return (
+    <Section id="para-quem">
+      <div className="container-k">
+        <SectionHeading
+          eyebrow="Para quem"
+          title="Empresas que já passaram da fase de improvisar."
+          lede="Se a sua empresa já fatura e já tem contador, você está exatamente no ponto em que essa conversa costuma valer a pena — porque aí o problema deixa de ser preço e passa a ser confiança."
+        />
+
+        <Stagger className="mt-20 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {AUDIENCE.map(({ icon: Icon, title, body }) => (
+            <StaggerItem key={title}>
+              <article className="group h-full rounded-xl border border-line bg-surface p-8 transition-[transform,border-color,box-shadow] duration-500 ease-[var(--ease-out-expo)] hover:-translate-y-1 hover:border-[rgb(var(--gold)/0.4)] hover:shadow-[var(--shadow-lift)] md:p-9">
+                <span className="grid size-11 place-items-center rounded-full border border-line text-[rgb(var(--gold))] transition-colors duration-500 group-hover:border-[rgb(var(--gold)/0.45)] group-hover:bg-[rgb(var(--gold)/0.06)]">
+                  <Icon className="size-[18px]" aria-hidden />
+                </span>
+                <h3 className="mt-7 text-[1.1875rem] tracking-[-0.02em] text-ink">
+                  {title}
+                </h3>
+                <p className="mt-3 max-w-[34ch] text-[0.9375rem] leading-relaxed text-ink-3 transition-colors duration-500 group-hover:text-ink-2">
+                  {body}
+                </p>
+              </article>
+            </StaggerItem>
+          ))}
+        </Stagger>
+
+        <Reveal delay={0.08} className="mt-16">
+          <div className="rounded-xl border border-line bg-surface-2 p-9 md:p-12">
+            <p className="text-[0.6875rem] font-medium uppercase tracking-[0.22em] text-ink-3">
+              Para quem a Korium não é
+            </p>
+            <p className="mt-6 max-w-[58ch] text-[1.125rem] leading-relaxed text-ink-2 md:text-[1.25rem]">
+              Se a sua decisão for pelo menor preço do mercado, existem
+              escritórios bem mais baratos que o nosso, e eles vão te atender
+              exatamente como aquele preço permite.{" "}
+              <span className="text-ink">
+                A gente prefere dizer isso agora do que você descobrir sozinho
+                na terceira mensagem sem resposta.
+              </span>
+            </p>
+          </div>
+        </Reveal>
+      </div>
+    </Section>
+  );
+}

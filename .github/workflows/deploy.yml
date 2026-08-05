@@ -1,0 +1,73 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # Lets you re-publish the current main from the Actions tab without a commit.
+  workflow_dispatch:
+
+# GITHUB_TOKEN permissions needed by the Pages deployment.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never let two deploys race. In-progress runs finish so a half-published
+# site is not left behind.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build static site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build and export
+        run: npm run build
+
+      - name: Verify export
+        # Fails loudly here rather than publishing a broken site. CNAME and
+        # .nojekyll come from public/ and must survive the export.
+        run: |
+          test -f out/index.html
+          test -f out/a/index.html
+          test -f out/b/index.html
+          test -f out/CNAME
+          test -f out/.nojekyll
+          echo "Export verified."
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
