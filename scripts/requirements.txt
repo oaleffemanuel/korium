@@ -1,0 +1,3 @@
+# Dependências para gerar o Catálogo de Serviços (scripts/build_catalogo.py).
+#   python3 -m pip install -r scripts/requirements.txt
+reportlab>=4.0

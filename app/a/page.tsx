@@ -1,20 +1,10 @@
 import type { Metadata } from "next";
 
 import { VersionA } from "@/components/variants/version-a";
-import { site } from "@/lib/site";
-import { VARIANTS } from "@/lib/variants";
+import { variantMetadata } from "@/lib/variant-metadata";
 
-export const metadata: Metadata = {
-  alternates: { canonical: `${VARIANTS.a.path}/` },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true, "max-image-preview": "large" },
-  },
-  openGraph: {
-    url: `${site.url}${VARIANTS.a.path}/`,
-  },
-};
+// Canonical and robots come from the registry in lib/variants.ts.
+export const metadata: Metadata = variantMetadata("a");
 
 export default function VersionAPage() {
   return <VersionA />;

@@ -173,6 +173,44 @@ O número que aparece escrito no rodapé é o campo `site.phone`, logo acima —
 
 ---
 
+## Documentos internos
+
+Em `docs/` ficam dois documentos que não são publicados no site:
+
+| Documento | O que é |
+| --- | --- |
+| [`PRINCIPIOS_COMERCIAIS.md`](docs/PRINCIPIOS_COMERCIAIS.md) | Como a Korium toma decisões comerciais |
+| [`CATALOGO_DE_SERVICOS.md`](docs/CATALOGO_DE_SERVICOS.md) / `.pdf` | O que está incluso na mensalidade e quanto cobrar fora dela |
+
+O catálogo é **gerado**, não editado à mão. O Markdown e o PDF saem da mesma
+fonte para que nunca mostrem preços diferentes.
+
+### Como alterar preços e regerar o PDF
+
+1. Editar os valores em [`scripts/catalogo_data.py`](scripts/catalogo_data.py).
+   Todos os preços, limites e tabelas estão nesse arquivo.
+2. Acrescentar uma linha em `HISTORICO_ROWS` e subir o `VERSAO` / `DATA_REVISAO`.
+3. Rodar:
+
+```bash
+python3 -m pip install -r scripts/requirements.txt   # só na primeira vez
+python3 scripts/build_catalogo.py
+```
+
+Isso reescreve `docs/CATALOGO_DE_SERVICOS.md` e `docs/CATALOGO_DE_SERVICOS.pdf`.
+Não edite esses dois arquivos diretamente: a próxima geração sobrescreve.
+
+O script verifica sozinho se algum texto ficou largo demais para a coluna e
+falha antes de gravar um PDF com palavra cortada ao meio. Se isso acontecer,
+ele diz qual coluna precisa de quantos milímetros, e o ajuste é feito nas
+listas `*_LARGURAS` do arquivo de dados (a soma precisa fechar em 174 mm).
+
+As fontes da marca ficam em `scripts/fonts/` como TTF, extraídas das mesmas
+Inter e Instrument Serif que o site usa, para que o PDF saia com a tipografia
+correta em qualquer máquina.
+
+---
+
 ## Notas técnicas
 
 - **Exportação estática.** O GitHub Pages serve arquivos e não roda Node, então

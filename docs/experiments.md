@@ -61,8 +61,8 @@ canônica para a variante ativa.
 
 ## Experimento 001 — Emoção x objetividade
 
-**Status:** Versão A no ar, Versão B implementada e pronta para receber
-tráfego.
+**Status:** Versão B promovida a padrão em 06/08/2026 e servida em `/`.
+Versão A continua ativa em `/a` para comparação.
 **Aberto em:** 05/08/2026.
 
 ### Hipótese
@@ -80,7 +80,7 @@ uma abertura mais sóbria.
 
 ### Versão A — emoção primeiro `/a`
 
-Posicionamento atual, no ar.
+Primeiro posicionamento. Continua no ar em `/a`, fora do índice.
 
 - **Promessa:** "Nunca mais corra atrás do seu contador."
 - **Abertura:** a frustração do visitante, antes de qualquer credencial.
@@ -93,7 +93,7 @@ Posicionamento atual, no ar.
 
 ### Versão B — página de serviço `/b`
 
-Implementada. Onde A defende um ponto de vista, B responde a pergunta de quem
+Variante padrão desde 06/08/2026. Onde A defende um ponto de vista, B responde a pergunta de quem
 já está procurando contador: o que vocês fazem, para quem, como funciona e
 como eu começo.
 

@@ -17,9 +17,9 @@ export const VARIANTS = {
     name: "Versão A",
     /** One line on what this variant is testing. */
     positioning: "Emoção primeiro — a promessa é parar de cobrar o contador.",
-    status: "live",
-    /** Only the live variant is indexed; the rest are duplicate content. */
-    indexable: true,
+    status: "ready",
+    /** Only the default variant is indexed; the rest are duplicate content. */
+    indexable: false,
   },
   b: {
     id: "b",
@@ -27,8 +27,8 @@ export const VARIANTS = {
     name: "Versão B",
     positioning:
       "Objetiva — página de serviço. O que fazemos, para quem e como começar.",
-    status: "ready",
-    indexable: false,
+    status: "live",
+    indexable: true,
   },
 } as const;
 
@@ -37,7 +37,7 @@ export type VariantId = keyof typeof VARIANTS;
 export const VARIANT_IDS = Object.keys(VARIANTS) as VariantId[];
 
 /** The variant served at `/`. Change this to flip the experiment. */
-export const DEFAULT_VARIANT: VariantId = "a";
+export const DEFAULT_VARIANT: VariantId = "b";
 
 export const indexableVariants = () =>
   VARIANT_IDS.filter((id) => VARIANTS[id].indexable);
