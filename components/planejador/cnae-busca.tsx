@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
 type Dados = { base: BaseCnae; impeditivos: Impeditivo[]; ambiguos: Impeditivo[] };
 
 let cache: Promise<Dados> | null = null;
-function carregar(): Promise<Dados> {
+export function carregar(): Promise<Dados> {
   if (!cache) {
     cache = Promise.all([
       import("@/lib/planejador/data/cnae.json"),

@@ -40,7 +40,7 @@ export function Campo({
 }
 
 export const inputBase = cn(
-  "h-11 w-full rounded-[10px] border border-pc-border bg-white px-3.5 text-[0.9375rem] text-pc-text",
+  "h-11 w-full rounded-[10px] border border-pc-border bg-white px-3.5 text-base text-pc-text md:text-[0.9375rem]",
   "placeholder:text-pc-muted transition-[border-color,box-shadow] duration-150",
   "hover:border-pc-border-strong",
   "focus:border-pc-primary focus:outline-none focus:ring-[3px] focus:ring-pc-primary/20",

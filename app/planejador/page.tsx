@@ -67,19 +67,19 @@ export default function PlanejadorPage() {
         </div>
       </header>
 
-      <main id="conteudo" className="pb-24 pt-12 md:pb-32 md:pt-16">
+      <main id="conteudo" className="pb-20 pt-10 md:pb-28 md:pt-14">
         <div className="container-k">
-          <div className="max-w-[46rem]">
+          <div className="mx-auto max-w-[44rem] text-center">
             <span className="inline-flex items-center rounded-full bg-pc-primary-soft px-3 py-1 text-[0.75rem] font-semibold text-pc-primary">
               Planejador de CNPJ · grátis
             </span>
-            <h1 className="mt-5 text-[2.125rem] font-bold leading-[1.1] tracking-[-0.025em] text-pc-text md:text-[3rem]">
+            <h1 className="mt-5 text-[2rem] font-bold leading-[1.1] tracking-[-0.025em] text-pc-text md:text-[2.75rem]">
               Qual regime faz a sua empresa pagar menos imposto?
             </h1>
-            <p className="mt-5 max-w-[56ch] text-[1.0625rem] leading-relaxed text-pc-text-2 md:text-[1.1875rem]">
+            <p className="mx-auto mt-4 max-w-[52ch] text-[1rem] leading-relaxed text-pc-text-2 md:text-[1.125rem]">
               Informe o que a empresa faz e quanto fatura. Você vê MEI, Simples Nacional, Lucro Presumido e Lucro Real lado a lado, com a memória de cálculo e um PDF com a sua marca.
             </p>
-            <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-[0.8125rem] font-medium text-pc-text-2">
+            <ul className="mt-5 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[0.8125rem] font-medium text-pc-text-2">
               {SELOS.map(({ Icone, texto }) => (
                 <li key={texto} className="inline-flex items-center gap-1.5">
                   <Icone className="size-4 text-pc-primary" aria-hidden /> {texto}
@@ -88,7 +88,7 @@ export default function PlanejadorPage() {
             </ul>
           </div>
 
-          <div className="mt-10 md:mt-14">
+          <div className="mt-8 md:mt-12">
             <Planejador />
           </div>
         </div>
