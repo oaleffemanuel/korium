@@ -1,0 +1,134 @@
+[
+{
+"cnae": "1113-5/02",
+"descricao": "Fabricação de cervejas e chopes",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Permitida apenas para micro e pequena cervejaria registrada no MAPA e sujeita à Anvisa/RFB (LC 123 art. 17, X, 'c', 1 e § 5º); vedada a produção de cerveja sem álcool (art. 17, X, 'b', 4) e de bebidas alcoólicas fora dessa exceção. Receita: Anexo II (indústria)."
+},
+{
+"cnae": "4635-4/02",
+"descricao": "Comércio atacadista de cerveja, chope e refrigerante",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Vedada a venda no atacado de cervejas sem álcool e de bebidas alcoólicas (LC 123 art. 17, X, 'b' e 'c'), salvo atacado feito por micro/pequena cervejaria, vinícola, destilaria ou produtor de licores registrados no MAPA; permitido o atacado de refrigerantes e demais bebidas não alcoólicas (itens revogados pela LC 147/2014). Receita: Anexo I."
+},
+{
+"cnae": "4635-4/03",
+"descricao": "Comércio atacadista de bebidas com atividade de fracionamento e acondicionamento associada",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Idem 4635-4/02: permitida se não envolver atacado de cerveja sem álcool nem de bebidas alcoólicas (exceto exceções do art. 17, X, 'c'). Receita: Anexo I."
+},
+{
+"cnae": "4635-4/99",
+"descricao": "Comércio atacadista de bebidas não especificadas anteriormente",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Incluída no Anexo VII pela Res. CGSN 156/2020. Idem 4635-4/02: permitida se não envolver atacado de cerveja sem álcool nem de bebidas alcoólicas (exceto exceções do art. 17, X, 'c'). Receita: Anexo I."
+},
+{
+"cnae": "4684-2/99",
+"descricao": "Comércio atacadista de outros produtos químicos e petroquímicos não especificados anteriormente",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Vedada a venda no atacado de pólvoras, explosivos e detonantes (LC 123 art. 17, X, 'a'); permitido o atacado dos demais produtos químicos/petroquímicos. Receita: Anexo I."
+},
+{
+"cnae": "4924-8/00",
+"descricao": "Transporte escolar",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Transporte escolar: Permitida apenas se o transporte de passageiros for municipal, fluvial, com características de transporte urbano/metropolitano ou sob fretamento contínuo em área metropolitana para estudantes/trabalhadores; vedado o transporte intermunicipal/interestadual de passageiros fora dessas hipóteses (LC 123 art. 17, VI; Res. CGSN 140 art. 15, XVI e §§ 4º-5º). Receita permitida: Anexo III (municipal) ou Anexo III deduzido ISS e acrescido ICMS do Anexo I (intermunicipal/interestadual autorizado) - LC 123 art. 18 § 5º-E."
+},
+{
+"cnae": "4929-9/02",
+"descricao": "Transporte rodoviário coletivo de passageiros, sob regime de fretamento, intermunicipal, interestadual e internacional",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Permitida apenas se o transporte de passageiros for municipal, fluvial, com características de transporte urbano/metropolitano ou sob fretamento contínuo em área metropolitana para estudantes/trabalhadores; vedado o transporte intermunicipal/interestadual de passageiros fora dessas hipóteses (LC 123 art. 17, VI; Res. CGSN 140 art. 15, XVI e §§ 4º-5º). Receita permitida: Anexo III (municipal) ou Anexo III deduzido ISS e acrescido ICMS do Anexo I (intermunicipal/interestadual autorizado) - LC 123 art. 18 § 5º-E."
+},
+{
+"cnae": "4929-9/04",
+"descricao": "Organização de excursões em veículos rodoviários próprios, intermunicipal, interestadual e internacional",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Permitida apenas se o transporte de passageiros for municipal, fluvial, com características de transporte urbano/metropolitano ou sob fretamento contínuo em área metropolitana para estudantes/trabalhadores; vedado o transporte intermunicipal/interestadual de passageiros fora dessas hipóteses (LC 123 art. 17, VI; Res. CGSN 140 art. 15, XVI e §§ 4º-5º). Receita permitida: Anexo III (municipal) ou Anexo III deduzido ISS e acrescido ICMS do Anexo I (intermunicipal/interestadual autorizado) - LC 123 art. 18 § 5º-E."
+},
+{
+"cnae": "4929-9/99",
+"descricao": "Outros transportes rodoviários de passageiros não especificados anteriormente",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Permitida apenas se o transporte de passageiros for municipal, fluvial, com características de transporte urbano/metropolitano ou sob fretamento contínuo em área metropolitana para estudantes/trabalhadores; vedado o transporte intermunicipal/interestadual de passageiros fora dessas hipóteses (LC 123 art. 17, VI; Res. CGSN 140 art. 15, XVI e §§ 4º-5º). Receita permitida: Anexo III (municipal) ou Anexo III deduzido ISS e acrescido ICMS do Anexo I (intermunicipal/interestadual autorizado) - LC 123 art. 18 § 5º-E."
+},
+{
+"cnae": "4950-7/00",
+"descricao": "Trens turísticos, teleféricos e similares",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Permitida apenas se o transporte de passageiros for municipal, fluvial, com características de transporte urbano/metropolitano ou sob fretamento contínuo em área metropolitana para estudantes/trabalhadores; vedado o transporte intermunicipal/interestadual de passageiros fora dessas hipóteses (LC 123 art. 17, VI; Res. CGSN 140 art. 15, XVI e §§ 4º-5º). Receita permitida: Anexo III (municipal) ou Anexo III deduzido ISS e acrescido ICMS do Anexo I (intermunicipal/interestadual autorizado) - LC 123 art. 18 § 5º-E."
+},
+{
+"cnae": "5011-4/02",
+"descricao": "Transporte marítimo de cabotagem - passageiros",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Permitida apenas se o transporte de passageiros for municipal, fluvial, com características de transporte urbano/metropolitano ou sob fretamento contínuo em área metropolitana para estudantes/trabalhadores; vedado o transporte intermunicipal/interestadual de passageiros fora dessas hipóteses (LC 123 art. 17, VI; Res. CGSN 140 art. 15, XVI e §§ 4º-5º). Receita permitida: Anexo III (municipal) ou Anexo III deduzido ISS e acrescido ICMS do Anexo I (intermunicipal/interestadual autorizado) - LC 123 art. 18 § 5º-E."
+},
+{
+"cnae": "5091-2/02",
+"descricao": "Transporte por navegação de travessia intermunicipal, interestadual e internacional",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Permitida apenas se o transporte de passageiros for municipal, fluvial, com características de transporte urbano/metropolitano ou sob fretamento contínuo em área metropolitana para estudantes/trabalhadores; vedado o transporte intermunicipal/interestadual de passageiros fora dessas hipóteses (LC 123 art. 17, VI; Res. CGSN 140 art. 15, XVI e §§ 4º-5º). Receita permitida: Anexo III (municipal) ou Anexo III deduzido ISS e acrescido ICMS do Anexo I (intermunicipal/interestadual autorizado) - LC 123 art. 18 § 5º-E."
+},
+{
+"cnae": "5099-8/01",
+"descricao": "Transporte aquaviário para passeios turísticos",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Permitida apenas se o transporte de passageiros for municipal, fluvial, com características de transporte urbano/metropolitano ou sob fretamento contínuo em área metropolitana para estudantes/trabalhadores; vedado o transporte intermunicipal/interestadual de passageiros fora dessas hipóteses (LC 123 art. 17, VI; Res. CGSN 140 art. 15, XVI e §§ 4º-5º). Receita permitida: Anexo III (municipal) ou Anexo III deduzido ISS e acrescido ICMS do Anexo I (intermunicipal/interestadual autorizado) - LC 123 art. 18 § 5º-E."
+},
+{
+"cnae": "5099-8/99",
+"descricao": "Outros transportes aquaviários não especificados anteriormente",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Permitida apenas se o transporte de passageiros for municipal, fluvial, com características de transporte urbano/metropolitano ou sob fretamento contínuo em área metropolitana para estudantes/trabalhadores; vedado o transporte intermunicipal/interestadual de passageiros fora dessas hipóteses (LC 123 art. 17, VI; Res. CGSN 140 art. 15, XVI e §§ 4º-5º). Receita permitida: Anexo III (municipal) ou Anexo III deduzido ISS e acrescido ICMS do Anexo I (intermunicipal/interestadual autorizado) - LC 123 art. 18 § 5º-E."
+},
+{
+"cnae": "5111-1/00",
+"descricao": "Transporte aéreo de passageiros regular",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Permitida apenas se o transporte de passageiros for municipal, fluvial, com características de transporte urbano/metropolitano ou sob fretamento contínuo em área metropolitana para estudantes/trabalhadores; vedado o transporte intermunicipal/interestadual de passageiros fora dessas hipóteses (LC 123 art. 17, VI; Res. CGSN 140 art. 15, XVI e §§ 4º-5º). Receita permitida: Anexo III (municipal) ou Anexo III deduzido ISS e acrescido ICMS do Anexo I (intermunicipal/interestadual autorizado) - LC 123 art. 18 § 5º-E."
+},
+{
+"cnae": "5112-9/01",
+"descricao": "Serviço de táxi aéreo e locação de aeronaves com tripulação",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Permitida apenas se o transporte de passageiros for municipal, fluvial, com características de transporte urbano/metropolitano ou sob fretamento contínuo em área metropolitana para estudantes/trabalhadores; vedado o transporte intermunicipal/interestadual de passageiros fora dessas hipóteses (LC 123 art. 17, VI; Res. CGSN 140 art. 15, XVI e §§ 4º-5º). Receita permitida: Anexo III (municipal) ou Anexo III deduzido ISS e acrescido ICMS do Anexo I (intermunicipal/interestadual autorizado) - LC 123 art. 18 § 5º-E."
+},
+{
+"cnae": "5112-9/99",
+"descricao": "Outros serviços de transporte aéreo de passageiros não regular",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Permitida apenas se o transporte de passageiros for municipal, fluvial, com características de transporte urbano/metropolitano ou sob fretamento contínuo em área metropolitana para estudantes/trabalhadores; vedado o transporte intermunicipal/interestadual de passageiros fora dessas hipóteses (LC 123 art. 17, VI; Res. CGSN 140 art. 15, XVI e §§ 4º-5º). Receita permitida: Anexo III (municipal) ou Anexo III deduzido ISS e acrescido ICMS do Anexo I (intermunicipal/interestadual autorizado) - LC 123 art. 18 § 5º-E."
+},
+{
+"cnae": "5229-0/01",
+"descricao": "Serviços de apoio ao transporte por táxi, inclusive centrais de chamada",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "A norma não explicita a atividade impeditiva abrangida; a subclasse inclui atividades auxiliares que podem configurar transporte intermunicipal/interestadual de passageiros (LC 123 art. 17, VI). Permitida se a empresa exercer apenas atividades não vedadas e prestar a declaração do art. 8º § 3º da Res. CGSN 140. Receita permitida: Anexo III (serviço não intelectual)."
+},
+{
+"cnae": "5229-0/99",
+"descricao": "Outras atividades auxiliares dos transportes terrestres não especificadas anteriormente",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "A norma não explicita a atividade impeditiva abrangida; a subclasse inclui atividades auxiliares que podem configurar transporte intermunicipal/interestadual de passageiros (LC 123 art. 17, VI). Permitida se a empresa exercer apenas atividades não vedadas e prestar a declaração do art. 8º § 3º da Res. CGSN 140. Receita permitida: Anexo III."
+},
+{
+"cnae": "6619-3/02",
+"descricao": "Correspondentes de instituições financeiras",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Vedadas atividades próprias de instituição financeira, factoring, assessoria creditícia, gestão de crédito e correlatas (LC 123 art. 3º § 4º, VIII; art. 17, I). Permitida se exercer apenas o serviço de correspondente (intermediação remunerada por comissão, sem operações financeiras próprias). Receita permitida: Anexo III ou V conforme Fator R (intermediação de negócios, LC 123 art. 18 § 5º-I, VII)."
+},
+{
+"cnae": "6619-3/99",
+"descricao": "Outras atividades auxiliares dos serviços financeiros não especificadas anteriormente",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Vedadas atividades próprias de instituição financeira, factoring, assessoria creditícia, gestão de crédito, administração de contas a pagar/receber (LC 123 art. 3º § 4º, VIII; art. 17, I). Permitida se exercer apenas atividades auxiliares não vedadas, com a declaração do art. 8º § 3º da Res. CGSN 140. Receita permitida: Anexo III ou V conforme Fator R (natureza intelectual/intermediação)."
+},
+{
+"cnae": "8299-7/99",
+"descricao": "Outras atividades de serviços prestados principalmente às empresas não especificadas anteriormente",
+"fonte": "Res. CGSN 140/2018, Anexo VII (atividades concomitantes: permitidas com declaração, art. 8º, § 3º)",
+"condicao": "Subclasse residual que abrange atividades permitidas e atividades vedadas (p.ex. serviços típicos de factoring/gestão de contas a receber, LC 123 art. 17, I; leilão já tem subclasse própria impeditiva 8299-7/04). Permitida se exercer apenas atividades não vedadas, com a declaração do art. 8º § 3º da Res. CGSN 140. Receita permitida: Anexo III (serviço não intelectual) ou Anexo III/V conforme Fator R se intelectual (LC 123 art. 18 §§ 5º-F e 5º-I, XII)."
+}
+]

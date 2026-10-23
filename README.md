@@ -20,6 +20,7 @@ npm run dev      # http://localhost:3000
 | `npm run build` | Build + exportação estática para `out/` |
 | `npm run start` | Serve o `out/` já exportado, igual ao GitHub Pages |
 | `npm run lint` | ESLint |
+| `npm test` | Testes do motor de cálculo do planejador (vitest) |
 | `npm run typecheck` | TypeScript sem emitir arquivos |
 
 Para conferir exatamente o que vai ao ar, rode `npm run build && npm run start` —
@@ -36,15 +37,21 @@ app/
   a/page.tsx        → Versão A (no ar)
   b/page.tsx        → Versão B (reservada)
   layout.tsx        → fontes, metadata, <html>
+  planejador/page.tsx → Planejador de CNPJ (/planejador), página pública
   globals.css       → design tokens e utilitários
 components/
   sections/         → seções da página
   variants/         → composição de cada versão
   site/             → nav, rodapé, CTA de WhatsApp, botão flutuante
   ui/               → primitivas (button, accordion)
+  planejador/       → formulário, busca de CNAE, resultados e gerador de PDF
+  planejador/pdf/   → relatório em @react-pdf/renderer (roda só no navegador)
 lib/
   site.ts           → contato, mensagens de WhatsApp, helper de link
   variants.ts       → registro de variantes e variante padrão
+  planejador/       → motor de cálculo puro (MEI, Simples, Presumido, Real,
+                      Reforma), tabelas com fonte legal e base CNAE 2.3
+public/planejador/  → fontes TTF para o PDF e logo
 docs/
   experiments.md    → hipóteses e registro dos testes A/B
 ```

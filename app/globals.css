@@ -75,6 +75,24 @@
   --color-on-navy-3: rgb(var(--on-navy-3));
   --color-navy-line: rgb(var(--navy-line));
 
+  /* Planejador de CNPJ (/planejador): identidade própria da calculadora,
+     fintech clara. Só os componentes de components/planejador usam. */
+  --color-pc-bg: #f6f8fb;
+  --color-pc-text: #0f172a;
+  --color-pc-text-2: #475569;
+  --color-pc-muted: #64748b;
+  --color-pc-primary: #2563eb;
+  --color-pc-primary-hover: #1d4ed8;
+  --color-pc-primary-soft: #eff4ff;
+  --color-pc-success: #15803d;
+  --color-pc-success-soft: #ecfdf3;
+  --color-pc-warning: #b45309;
+  --color-pc-warning-soft: #fff7e6;
+  --color-pc-danger: #b91c1c;
+  --color-pc-danger-soft: #fef2f2;
+  --color-pc-border: #e5e9f0;
+  --color-pc-border-strong: #cbd5e1;
+
   --font-sans: var(--sans);
   --font-serif: var(--serif);
 

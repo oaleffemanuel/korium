@@ -1,0 +1,507 @@
+[
+{
+"cnae": "1220-4/01",
+"descricao": "Fabricação de cigarros",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "1220-4/02",
+"descricao": "Fabricação de cigarrilhas e charutos",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "1220-4/03",
+"descricao": "Fabricação de filtros para cigarros",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "2092-4/01",
+"descricao": "Fabricação de pólvoras, explosivos e detonantes",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "2550-1/01",
+"descricao": "Fabricação de equipamento bélico pesado, exceto veículos militares de combate",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "2550-1/02",
+"descricao": "Fabricação de armas de fogo, outras armas  e munições",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "2910-7/01",
+"descricao": "Fabricação de automóveis, camionetas e utilitários",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "3091-1/01",
+"descricao": "Fabricação de motocicletas",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "3511-5/01",
+"descricao": "Geração de energia elétrica",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "3511-5/02",
+"descricao": "Atividades de coordenação e controle da operação da geração e transmissão de energia elétrica",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "3512-3/00",
+"descricao": "Transmissão de energia elétrica",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "3513-1/00",
+"descricao": "Comércio atacadista de energia elétrica",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "3514-0/00",
+"descricao": "Distribuição de energia elétrica",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "4110-7/00",
+"descricao": "Incorporação de empreendimentos imobiliários",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "4636-2/02",
+"descricao": "Comércio atacadista de cigarros, cigarrilhas e charutos",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "4912-4/01",
+"descricao": "Transporte ferroviário de passageiros intermunicipal e interestadual",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "4922-1/01",
+"descricao": "Transporte rodoviário coletivo de passageiros, com itinerário fixo, intermunicipal, exceto em região metropolitana",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "4922-1/02",
+"descricao": "Transporte rodoviário coletivo de passageiros, com itinerário fixo, interestadual",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "5310-5/01",
+"descricao": "Atividades do correio nacional",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6410-7/00",
+"descricao": "Banco central",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6421-2/00",
+"descricao": "Bancos comerciais",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6422-1/00",
+"descricao": "Bancos múltiplos, com carteira comercial",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6423-9/00",
+"descricao": "Caixas econômicas",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6424-7/01",
+"descricao": "Bancos cooperativos",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6424-7/02",
+"descricao": "Cooperativas centrais de crédito",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6424-7/03",
+"descricao": "Cooperativas de crédito mútuo",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6424-7/04",
+"descricao": "Cooperativas de crédito rural",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6431-0/00",
+"descricao": "Bancos múltiplos, sem carteira comercial",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6432-8/00",
+"descricao": "Bancos de investimento",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6433-6/00",
+"descricao": "Bancos de desenvolvimento",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6434-4/00",
+"descricao": "Agências de fomento",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6435-2/01",
+"descricao": "Sociedades de crédito imobiliário",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6435-2/02",
+"descricao": "Associações de poupança e empréstimo",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6435-2/03",
+"descricao": "Companhias hipotecárias",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6436-1/00",
+"descricao": "Sociedades de crédito, financiamento e investimento - financeiras",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6437-9/00",
+"descricao": "Sociedades de crédito ao microempreendedor",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6438-7/01",
+"descricao": "Bancos de câmbio",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6438-7/99",
+"descricao": "Outras instituições de intermediação não monetária",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6440-9/00",
+"descricao": "Arrendamento mercantil",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6450-6/00",
+"descricao": "Sociedades de capitalização",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6461-1/00",
+"descricao": "Holdings de instituições financeiras",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6462-0/00",
+"descricao": "Holdings de instituições não financeiras",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6463-8/00",
+"descricao": "Outras sociedades de participação, exceto holdings",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6470-1/01",
+"descricao": "Fundos de investimento, exceto previdenciários e imobiliários",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6470-1/02",
+"descricao": "Fundos de investimento previdenciários",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6470-1/03",
+"descricao": "Fundos de investimento imobiliários",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6491-3/00",
+"descricao": "Sociedades de fomento mercantil - factoring",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6492-1/00",
+"descricao": "Securitização de créditos",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6499-9/01",
+"descricao": "Clubes de investimento",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6499-9/02",
+"descricao": "Sociedades de investimento",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6499-9/03",
+"descricao": "Fundo garantidor de crédito",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6499-9/04",
+"descricao": "Caixas de financiamento de corporações",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6499-9/05",
+"descricao": "Concessão de crédito pelas oscip",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6499-9/99",
+"descricao": "Outras atividades de serviços financeiros não especificadas anteriormente",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6511-1/01",
+"descricao": "Sociedade seguradora de seguros vida",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6511-1/02",
+"descricao": "Planos de auxílio funeral",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6512-0/00",
+"descricao": "Sociedade seguradora de seguros não vida",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6520-1/00",
+"descricao": "Sociedade seguradora de seguros saúde",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6530-8/00",
+"descricao": "Resseguros",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6541-3/00",
+"descricao": "Previdência complementar fechada",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6542-1/00",
+"descricao": "Previdência complementar aberta",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6611-8/01",
+"descricao": "Bolsa de valores",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6611-8/02",
+"descricao": "Bolsa de mercadorias",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6611-8/03",
+"descricao": "Bolsa de mercadorias e futuros",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6611-8/04",
+"descricao": "Administração de mercados de balcão organizados",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6612-6/01",
+"descricao": "Corretoras de títulos e valores mobiliários",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6612-6/02",
+"descricao": "Distribuidoras de títulos e valores mobiliários",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6612-6/03",
+"descricao": "Corretoras de câmbio",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6612-6/04",
+"descricao": "Corretoras de contratos de mercadorias",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6612-6/05",
+"descricao": "Agentes de investimentos em aplicações financeiras",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6619-3/01",
+"descricao": "Serviços de liquidação e custódia",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6619-3/03",
+"descricao": "Representações de bancos estrangeiros",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6619-3/04",
+"descricao": "Caixas eletrônicos",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6810-2/02",
+"descricao": "Aluguel de imóveis próprios",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6810-2/03",
+"descricao": "Loteamento de imóveis próprios",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6911-7/02",
+"descricao": "Atividades auxiliares da justiça",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "6912-5/00",
+"descricao": "Cartórios",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "7820-5/00",
+"descricao": "Locação de mão de obra temporária",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "7830-2/00",
+"descricao": "Fornecimento e gestão de recursos humanos para terceiros",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "8112-5/00",
+"descricao": "Condomínios prediais",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "8299-7/04",
+"descricao": "Leiloeiros independentes",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "8411-6/00",
+"descricao": "Administração pública em geral",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "8412-4/00",
+"descricao": "Regulação das atividades de saúde, educação, serviços culturais e outros serviços sociais",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "8413-2/00",
+"descricao": "Regulação das atividades econômicas",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "8421-3/00",
+"descricao": "Relações exteriores",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "8422-1/00",
+"descricao": "Defesa",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "8423-0/00",
+"descricao": "Justiça",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "8424-8/00",
+"descricao": "Segurança e ordem pública",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "8425-6/00",
+"descricao": "Defesa civil",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "8430-2/00",
+"descricao": "Seguridade social obrigatória",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "8550-3/01",
+"descricao": "Administração de caixas escolares",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "9411-1/00",
+"descricao": "Atividades de organizações associativas patronais e empresariais",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "9412-0/01",
+"descricao": "Atividades de fiscalização profissional",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "9412-0/99",
+"descricao": "Outras atividades associativas profissionais",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "9420-1/00",
+"descricao": "Atividades de organizações sindicais",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "9430-8/00",
+"descricao": "Atividades de associações de defesa de direitos sociais",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "9491-0/00",
+"descricao": "Atividades de organizações religiosas ou filosóficas",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "9492-8/00",
+"descricao": "Atividades de organizações políticas",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "9493-6/00",
+"descricao": "Atividades de organizações associativas ligadas à cultura e à arte",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "9499-5/00",
+"descricao": "Atividades associativas não especificadas anteriormente",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+},
+{
+"cnae": "9900-8/00",
+"descricao": "Organismos internacionais e outras instituições extraterritoriais",
+"fonte": "Res. CGSN 140/2018, Anexo VI (atividades impeditivas ao Simples Nacional)"
+}
+]

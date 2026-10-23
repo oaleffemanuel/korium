@@ -51,6 +51,8 @@ jobs:
           test -f out/index.html
           test -f out/a/index.html
           test -f out/b/index.html
+          test -f out/planejador/index.html
+          test -f out/planejador/fonts/Inter-400.ttf
           test -f out/CNAME
           test -f out/.nojekyll
           echo "Export verified."
