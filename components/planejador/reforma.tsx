@@ -19,16 +19,19 @@ export function Reforma({
   comparativo,
   projecao,
   onCenario,
+  embutido = false,
 }: {
   comparativo: Comparativo;
   projecao: ProjecaoReforma;
   onCenario: (id: (typeof CENARIOS)[number]["id"]) => void;
+  /** Dentro de uma aba: sem o cartão externo. */
+  embutido?: boolean;
 }) {
   const disponiveis = REGIMES.filter((r) => projecao.anos.some((a) => a.custos[r] !== null));
   const hoje = comparativo.recomendado;
 
   return (
-    <section className="rounded-2xl border border-pc-border bg-white p-6 md:p-7">
+    <section className={cn(!embutido && "rounded-2xl border border-pc-border bg-white p-6 md:p-7")}>
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div>
           <h2 className="text-[1.125rem] font-semibold tracking-[-0.01em] text-pc-text">Reforma Tributária: 2026 a 2033</h2>

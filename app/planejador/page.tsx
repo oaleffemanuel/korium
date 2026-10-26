@@ -67,30 +67,33 @@ export default function PlanejadorPage() {
         </div>
       </header>
 
-      <main id="conteudo" className="pb-20 pt-10 md:pb-28 md:pt-14">
-        <div className="container-k">
-          <div className="mx-auto max-w-[44rem] text-center">
-            <span className="inline-flex items-center rounded-full bg-pc-primary-soft px-3 py-1 text-[0.75rem] font-semibold text-pc-primary">
-              Planejador de CNPJ · grátis
-            </span>
-            <h1 className="mt-5 text-[2rem] font-bold leading-[1.1] tracking-[-0.025em] text-pc-text md:text-[2.75rem]">
-              Qual regime faz a sua empresa pagar menos imposto?
-            </h1>
-            <p className="mx-auto mt-4 max-w-[52ch] text-[1rem] leading-relaxed text-pc-text-2 md:text-[1.125rem]">
-              Informe o que a empresa faz e quanto fatura. Você vê MEI, Simples Nacional, Lucro Presumido e Lucro Real lado a lado, com a memória de cálculo e um PDF com a sua marca.
-            </p>
-            <ul className="mt-5 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[0.8125rem] font-medium text-pc-text-2">
-              {SELOS.map(({ Icone, texto }) => (
-                <li key={texto} className="inline-flex items-center gap-1.5">
-                  <Icone className="size-4 text-pc-primary" aria-hidden /> {texto}
-                </li>
-              ))}
-            </ul>
+      <main id="conteudo" className="pb-20 md:pb-28">
+        {/* Faixa escura: título e promessa. O formulário sobrepõe a borda inferior. */}
+        <section className="bg-pc-text pb-28 pt-12 text-white md:pb-32 md:pt-16">
+          <div className="container-k">
+            <div className="mx-auto max-w-[46rem] text-center">
+              <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-[0.75rem] font-semibold text-white/85 ring-1 ring-white/15">
+                Planejador de CNPJ · grátis · tabelas de {ANO_REFERENCIA}
+              </span>
+              <h1 className="mt-5 text-[2.125rem] font-bold leading-[1.08] tracking-[-0.025em] md:text-[3rem]">
+                Quanto a sua empresa pagaria de imposto em cada regime?
+              </h1>
+              <p className="mx-auto mt-4 max-w-[52ch] text-[1rem] leading-relaxed text-white/75 md:text-[1.125rem]">
+                Três respostas e você vê MEI, Simples Nacional, Lucro Presumido e Lucro Real lado a lado, com o porquê e um PDF com a sua marca.
+              </p>
+              <ul className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[0.8125rem] font-medium text-white/70">
+                {SELOS.map(({ Icone, texto }) => (
+                  <li key={texto} className="inline-flex items-center gap-1.5">
+                    <Icone className="size-4 text-pc-primary-soft" aria-hidden /> {texto}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
+        </section>
 
-          <div className="mt-8 md:mt-12">
-            <Planejador />
-          </div>
+        <div className="container-k -mt-20 md:-mt-24">
+          <Planejador />
         </div>
       </main>
 

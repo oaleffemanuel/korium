@@ -1,21 +1,24 @@
 "use client";
 
 import * as React from "react";
-import { ArrowUpRight, Check, Download, Info, Loader2, TrendingDown } from "lucide-react";
+import { ArrowUpRight, Check, Download, Loader2 } from "lucide-react";
 
 import { Botao } from "@/components/planejador/campos";
 import type { DadosEmpresa } from "@/components/planejador/planejador";
 import { Reforma, useProjecaoReforma } from "@/components/planejador/reforma";
 import { NOME_ATIVIDADE } from "@/lib/planejador/cnae";
+import { explicarVencedor } from "@/lib/planejador/explicar";
 import { brl, pct } from "@/lib/planejador/money";
-import { NOME_REGIME, type Comparativo } from "@/lib/planejador/simular";
 import { NOME_TRIBUTO } from "@/lib/planejador/nomes";
+import { NOME_REGIME, type Comparativo } from "@/lib/planejador/simular";
 import type { ResultadoRegime } from "@/lib/planejador/types";
 import { mensagemWhatsApp } from "@/lib/planejador/whatsapp";
-import { externalLinkProps, whatsappLink } from "@/lib/site";
+import { externalLinkProps, site, whatsappLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export { NOME_TRIBUTO } from "@/lib/planejador/nomes";
+
+type Aba = "resumo" | "folha" | "reforma" | "memoria";
 
 export function Resultados({
   comparativo,
@@ -27,8 +30,10 @@ export function Resultados({
   const { resultados, recomendado, segundo, economiaAnual, entrada } = comparativo;
   const simples = resultados.find((r) => r.regime === "SIMPLES");
   const { projecao, setCenarioId } = useProjecaoReforma(comparativo);
+  const [aba, setAba] = React.useState<Aba>("resumo");
   const [gerando, setGerando] = React.useState(false);
   const [erroPdf, setErroPdf] = React.useState<string | null>(null);
+  const porque = React.useMemo(() => explicarVencedor(comparativo), [comparativo]);
 
   async function baixarPdf() {
     setGerando(true);
@@ -40,7 +45,7 @@ export function Resultados({
       const a = document.createElement("a");
       a.href = url;
       const nome = (empresa.nome || "empresa").normalize("NFD").replace(/[^\w-]+/g, "-");
-      a.download = `Planejador-CNPJ-Korium-${nome}.pdf`;
+      a.download = `Planejador-CNPJ-${site.name.replace(/\s+/g, "-")}-${nome}.pdf`;
       a.click();
       setTimeout(() => URL.revokeObjectURL(url), 10_000);
     } catch (e) {
@@ -51,186 +56,240 @@ export function Resultados({
     }
   }
 
+  const abas: Array<[Aba, string, string]> = [
+    ["resumo", "Resumo", "Os quatro regimes e por que o indicado vence"],
+    ["folha", "Folha e CNAE", "O Fator R e o enquadramento da atividade"],
+    ["reforma", "Reforma 2027–2033", "O custo de cada caminho, ano a ano"],
+    ["memoria", "Memória de cálculo", "Cada tributo, para conferir com o contador"],
+  ];
+
   return (
     <div className="flex flex-col gap-6">
-      {/* Veredito */}
-      <section className="overflow-hidden rounded-2xl border border-pc-border bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04),0_8px_24px_-12px_rgba(15,23,42,0.12)]">
-        <div className="h-1.5 bg-pc-primary" />
-        <div className="p-6 md:p-8">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-pc-success-soft px-2.5 py-1 text-[0.75rem] font-semibold text-pc-success">
-            <Check className="size-3.5" strokeWidth={3} /> Regime indicado
-          </span>
-          {recomendado ? (
-            <>
-              <h2 className="mt-4 text-[1.75rem] font-bold tracking-[-0.02em] text-pc-text md:text-[2.25rem]">
-                {NOME_REGIME[recomendado.regime]}
-                {recomendado.simples ? (
-                  <span className="text-pc-primary"> · Anexo {recomendado.simples.anexo}</span>
-                ) : null}
-              </h2>
-              <div className="mt-6 grid gap-4 sm:grid-cols-3">
-                <Metrica rotulo="Por ano" valor={brl(recomendado.totalGeralAnual)} destaque />
-                <Metrica rotulo="Por mês" valor={brl(recomendado.totalGeralAnual / 12)} />
-                <Metrica rotulo="Da receita" valor={pct(recomendado.cargaEfetiva, 1)} />
-              </div>
-              {segundo ? (
-                <div className="mt-6 flex flex-col gap-3 rounded-xl bg-pc-success-soft px-4 py-3.5 sm:flex-row sm:items-center">
-                  <span className="inline-flex items-center gap-2 text-[1rem] font-bold text-pc-success">
-                    <TrendingDown className="size-5" /> Economia de {brl(economiaAnual)} por ano
-                  </span>
-                  <span className="text-[0.875rem] text-pc-text-2">
-                    frente ao {NOME_REGIME[segundo.regime]}, a segunda opção.
-                  </span>
-                </div>
-              ) : null}
-              <p className="mt-4 text-[0.8125rem] leading-relaxed text-pc-muted">
-                Receita de {brl(entrada.receitaAnual)} por ano, folha de {brl(entrada.folhaAnual)} e pró-labore de{" "}
-                {brl(entrada.proLaboreAnual)}.
-              </p>
-            </>
-          ) : (
-            <p className="mt-4 text-pc-text-2">
-              Nenhum regime elegível com os dados informados. Revise a receita e a atividade.
+      {/* ------------------------------------------------------------ veredito */}
+      <section className="overflow-hidden rounded-2xl border border-pc-border bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04),0_12px_32px_-16px_rgba(15,23,42,0.18)]">
+        <div className="grid lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
+          <div className="p-6 md:p-8">
+            <p className="text-[0.8125rem] font-medium text-pc-muted">
+              Com {brl(entrada.receitaAnual / 12)} por mês
+              {empresa.cnae ? ` em ${empresa.cnae.descricao.toLowerCase()}` : ` em ${NOME_ATIVIDADE[entrada.atividade].toLowerCase()}`}, sua empresa paga menos no
             </p>
-          )}
+            {recomendado ? (
+              <>
+                <h2 className="mt-2 text-[2rem] font-bold leading-[1.05] tracking-[-0.025em] text-pc-text md:text-[2.75rem]">
+                  {NOME_REGIME[recomendado.regime]}
+                  {recomendado.simples ? (
+                    <span className="mt-1 block text-[0.55em] font-semibold tracking-normal text-pc-primary">Anexo {recomendado.simples.anexo}</span>
+                  ) : null}
+                </h2>
+                <div className="mt-6 flex flex-wrap items-end gap-x-8 gap-y-4">
+                  <div>
+                    <div className="text-[2.75rem] font-bold leading-none tabular-nums tracking-[-0.03em] text-pc-primary md:text-[3.25rem]">
+                      {brl(recomendado.totalGeralAnual / 12)}
+                    </div>
+                    <div className="mt-1.5 text-[0.8125rem] font-medium text-pc-muted">por mês, impostos e encargos</div>
+                  </div>
+                  <div>
+                    <div className="text-[1.5rem] font-semibold leading-none tabular-nums tracking-[-0.02em] text-pc-text">
+                      {brl(recomendado.totalGeralAnual)}
+                    </div>
+                    <div className="mt-1.5 text-[0.8125rem] font-medium text-pc-muted">por ano · {pct(recomendado.cargaEfetiva, 1)} da receita</div>
+                  </div>
+                </div>
+                {segundo ? (
+                  <p className="mt-6 inline-flex items-center gap-2 rounded-full bg-pc-success-soft px-3.5 py-1.5 text-[0.875rem] font-semibold text-pc-success">
+                    <Check className="size-4" strokeWidth={3} /> Economia de {brl(economiaAnual)} por ano frente ao {NOME_REGIME[segundo.regime]}
+                  </p>
+                ) : null}
+                {porque[1] ? <p className="mt-5 max-w-[52ch] text-[0.9375rem] leading-relaxed text-pc-text-2">{porque[1]}</p> : null}
+              </>
+            ) : (
+              <p className="mt-4 text-pc-text-2">Nenhum regime elegível com os dados informados. Revise a receita e a atividade.</p>
+            )}
+          </div>
+          <div className="border-t border-pc-border bg-pc-bg p-6 lg:border-l lg:border-t-0 md:p-8">
+            <h3 className="text-[0.8125rem] font-semibold uppercase tracking-[0.06em] text-pc-muted">Custo por ano, lado a lado</h3>
+            <Barras resultados={resultados} recomendado={recomendado} />
+            <p className="mt-4 text-[0.75rem] leading-relaxed text-pc-muted">
+              Tributos da empresa mais encargos sobre folha e pró-labore. Não entram INSS do sócio, FGTS e ICMS fora do Simples.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Cards */}
-      <section>
-        <Titulo>Os quatro regimes, lado a lado</Titulo>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          {resultados.map((r) => (
-            <CardRegime key={r.regime} r={r} recomendado={r === recomendado} />
+      {/* ------------------------------------------------------------ abas */}
+      <section className="rounded-2xl border border-pc-border bg-white">
+        <div role="tablist" aria-label="Detalhes do resultado" className="flex gap-1 overflow-x-auto border-b border-pc-border p-1.5">
+          {abas.map(([id, rotulo, desc]) => (
+            <button
+              key={id}
+              role="tab"
+              type="button"
+              aria-selected={aba === id}
+              onClick={() => setAba(id)}
+              title={desc}
+              className={cn(
+                "whitespace-nowrap rounded-lg px-3.5 py-2 text-[0.875rem] font-semibold transition-colors",
+                aba === id ? "bg-pc-text text-white" : "text-pc-text-2 hover:bg-pc-bg hover:text-pc-text",
+              )}
+            >
+              {rotulo}
+            </button>
           ))}
         </div>
-        <p className="mt-3 flex gap-2 text-[0.8125rem] leading-relaxed text-pc-muted">
-          <Info className="mt-0.5 size-3.5 shrink-0" aria-hidden />
-          Os totais somam os tributos da empresa e os encargos patronais sobre folha e pró-labore, que mudam de regime para regime. INSS do sócio, FGTS e ICMS fora do Simples não entram.
-        </p>
-      </section>
+        <div className="p-5 md:p-7">
+          <p className="mb-5 text-[0.9375rem] text-pc-text-2">{abas.find(([id]) => id === aba)?.[2]}.</p>
 
-      {/* Fator R */}
-      {simples?.simples?.fatorR != null && simples.simples.fatorRAtingido !== null ? (
-        <Painel titulo="Fator R: a folha decide o anexo">
-          <p className="text-[0.9375rem] leading-relaxed text-pc-text-2">
-            Sua folha mais pró-labore representa{" "}
-            <strong className="font-semibold text-pc-text">{pct(simples.simples.fatorR, 1)}</strong> da receita.{" "}
-            {simples.simples.fatorRAtingido ? (
-              <>Como está acima de 28 %, a atividade é tributada pelo <strong className="font-semibold text-pc-text">Anexo III</strong>, o mais barato dos dois.</>
-            ) : (
-              <>
-                Abaixo de 28 %, a atividade cai no <strong className="font-semibold text-pc-text">Anexo V</strong>. Com mais{" "}
-                <strong className="font-semibold text-pc-text">{brl(simples.simples.folhaParaFatorR ?? 0)}</strong> por ano de folha ou pró-labore ela migraria para o Anexo III. Vale a conta: às vezes aumentar o pró-labore reduz o imposto total.
-              </>
-            )}
-          </p>
-        </Painel>
-      ) : null}
-
-      {/* CNAE */}
-      {empresa.cnae ? (
-        <Painel titulo="Sobre o CNAE escolhido">
-          <dl className="grid gap-x-8 gap-y-3 text-[0.9375rem] sm:grid-cols-2">
-            <Par rotulo="Código" valor={<span className="font-mono">{empresa.cnae.cnae}</span>} />
-            <Par rotulo="Natureza" valor={NOME_ATIVIDADE[empresa.cnae.atividade]} />
-            <Par
-              rotulo="Anexo do Simples"
-              valor={
-                empresa.cnae.sujeitoFatorR && simples?.simples
-                  ? `Anexo ${simples.simples.anexo} (Fator R ${simples.simples.fatorRAtingido ? "atingido" : "abaixo de 28 %"})`
-                  : `Anexo ${empresa.cnae.anexoBase}`
-              }
-            />
-            <Par rotulo="Base legal" valor={empresa.cnae.fonte} />
-          </dl>
-          {empresa.cnae.impeditivo ? (
-            <Aviso tom="erro">
-              Este CNAE consta da lista de atividades impeditivas ao Simples Nacional ({empresa.cnae.impeditivo.fonte}). O Simples não está disponível para ele.
-            </Aviso>
-          ) : null}
-          {empresa.cnae.ambiguo ? (
-            <Aviso tom="alerta">
-              Este CNAE pode ou não ser aceito no Simples, dependendo da atividade exercida de fato ({empresa.cnae.ambiguo.fonte}). {empresa.cnae.ambiguo.condicao}
-            </Aviso>
-          ) : null}
-          {empresa.cnae.nota ? <Aviso>{empresa.cnae.nota}</Aviso> : null}
-        </Painel>
-      ) : null}
-
-      {/* Reforma */}
-      <Reforma comparativo={comparativo} projecao={projecao} onCenario={setCenarioId} />
-
-      {/* Memória */}
-      <section>
-        <Titulo>Memória de cálculo</Titulo>
-        <div className="mt-4 flex flex-col gap-3">
-          {resultados
-            .filter((r) => r.elegivel)
-            .map((r) => (
-              <details key={r.regime} className="group rounded-xl border border-pc-border bg-white">
-                <summary className="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 text-[0.9375rem] font-semibold text-pc-text [&::-webkit-details-marker]:hidden">
-                  {NOME_REGIME[r.regime]}
-                  <span className="text-[0.875rem] font-medium tabular-nums text-pc-text-2">{brl(r.totalGeralAnual)} / ano</span>
-                </summary>
-                <div className="border-t border-pc-border px-5 py-4">
-                  <table className="w-full text-[0.875rem]">
-                    <tbody>
-                      {r.linhas.map((l, i) => (
-                        <tr key={`${l.tributo}-${i}`} className="border-b border-pc-border/70 last:border-0">
-                          <td className="py-2 pr-3 text-pc-text-2">
-                            {NOME_TRIBUTO[l.tributo]}
-                            {l.nota ? <span className="block text-[0.75rem] text-pc-muted">{l.nota}</span> : null}
-                          </td>
-                          <td className="py-2 pr-3 text-right tabular-nums text-pc-muted">
-                            {l.sobreReceita > 0 ? pct(l.sobreReceita) : "—"}
-                          </td>
-                          <td className="py-2 text-right font-medium tabular-nums text-pc-text">{brl(l.valorAnual)}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  <ol className="mt-4 flex flex-col gap-2 text-[0.8125rem] leading-relaxed text-pc-text-2">
-                    {r.memoria.map((m, i) => (
+          {aba === "resumo" ? (
+            <div className="flex flex-col gap-6">
+              <div className="grid gap-3 sm:grid-cols-2">
+                {resultados.map((r) => (
+                  <CardRegime key={r.regime} r={r} recomendado={r === recomendado} />
+                ))}
+              </div>
+              {porque.length ? (
+                <div className="rounded-xl bg-pc-bg p-5">
+                  <h3 className="text-[1rem] font-semibold text-pc-text">Por que o indicado vence</h3>
+                  <ul className="mt-3 flex flex-col gap-2 text-[0.9375rem] leading-relaxed text-pc-text-2">
+                    {porque.map((f, i) => (
                       <li key={i} className="flex gap-2.5">
-                        <span className="shrink-0 tabular-nums text-pc-muted">{i + 1}.</span>
-                        {m}
+                        <span className="mt-[0.6rem] size-1.5 shrink-0 rounded-full bg-pc-primary" aria-hidden />
+                        {f}
                       </li>
                     ))}
-                  </ol>
-                  {r.avisos.length ? (
-                    <ul className="mt-4 flex flex-col gap-2">
-                      {r.avisos.map((a) => (
-                        <li key={a} className="text-[0.8125rem] leading-relaxed text-pc-muted">• {a}</li>
-                      ))}
-                    </ul>
-                  ) : null}
+                  </ul>
                 </div>
-              </details>
-            ))}
+              ) : null}
+            </div>
+          ) : null}
+
+          {aba === "folha" ? (
+            <div className="grid gap-5 md:grid-cols-2">
+              {simples?.simples?.fatorR != null && simples.simples.fatorRAtingido !== null ? (
+                <Bloco titulo="Fator R: a folha decide o anexo">
+                  <div className="mb-3 flex items-end gap-3">
+                    <span className="text-[2.25rem] font-bold leading-none tabular-nums tracking-[-0.03em] text-pc-text">
+                      {pct(simples.simples.fatorR, 1)}
+                    </span>
+                    <span className="pb-1 text-[0.8125rem] text-pc-muted">da receita vai para folha e pró-labore · limite 28 %</span>
+                  </div>
+                  <Medidor valor={simples.simples.fatorR} limite={0.28} />
+                  <p className="mt-4 text-[0.9375rem] leading-relaxed text-pc-text-2">
+                    {simples.simples.fatorRAtingido ? (
+                      <>Acima de 28 %, a atividade é tributada pelo <strong className="font-semibold text-pc-text">Anexo III</strong>, o mais barato dos dois.</>
+                    ) : (
+                      <>
+                        Abaixo de 28 %, a atividade cai no <strong className="font-semibold text-pc-text">Anexo V</strong>. Com mais{" "}
+                        <strong className="font-semibold text-pc-text">{brl((simples.simples.folhaParaFatorR ?? 0) / 12)} por mês</strong> de pró-labore ou folha ela migraria para o Anexo III. Às vezes pagar mais pró-labore reduz o imposto total.
+                      </>
+                    )}
+                  </p>
+                </Bloco>
+              ) : (
+                <Bloco titulo="Fator R">
+                  <p className="text-[0.9375rem] leading-relaxed text-pc-text-2">
+                    A atividade informada não depende do Fator R: o anexo do Simples é fixo para ela.
+                  </p>
+                </Bloco>
+              )}
+              <Bloco titulo={empresa.cnae ? "Sobre o CNAE escolhido" : "Sobre a atividade"}>
+                <dl className="grid gap-x-6 gap-y-3 text-[0.9375rem] sm:grid-cols-2">
+                  {empresa.cnae ? <Par rotulo="Código" valor={<span className="font-mono">{empresa.cnae.cnae}</span>} /> : null}
+                  <Par rotulo="Natureza" valor={NOME_ATIVIDADE[entrada.atividade]} />
+                  <Par
+                    rotulo="Anexo do Simples"
+                    valor={
+                      simples?.simples
+                        ? `Anexo ${simples.simples.anexo}${simples.simples.fatorRAtingido !== null ? ` (Fator R ${simples.simples.fatorRAtingido ? "atingido" : "abaixo de 28 %"})` : ""}`
+                        : "—"
+                    }
+                  />
+                  {empresa.cnae ? <Par rotulo="Base legal" valor={empresa.cnae.fonte} /> : null}
+                </dl>
+                {empresa.cnae?.impeditivo ? (
+                  <Aviso tom="erro">Este CNAE consta da lista de atividades impeditivas ao Simples Nacional ({empresa.cnae.impeditivo.fonte}).</Aviso>
+                ) : null}
+                {empresa.cnae?.ambiguo ? (
+                  <Aviso tom="alerta">Este CNAE pode ou não ser aceito no Simples, conforme a atividade exercida de fato ({empresa.cnae.ambiguo.fonte}). {empresa.cnae.ambiguo.condicao}</Aviso>
+                ) : null}
+                {empresa.cnae?.nota ? <Aviso>{empresa.cnae.nota}</Aviso> : null}
+              </Bloco>
+            </div>
+          ) : null}
+
+          {aba === "reforma" ? <Reforma comparativo={comparativo} projecao={projecao} onCenario={setCenarioId} embutido /> : null}
+
+          {aba === "memoria" ? (
+            <div className="flex flex-col gap-3">
+              <p className="text-[0.8125rem] text-pc-muted">Receita constante ao longo do ano, com a receita anual como RBT12. Alíquotas e tabelas de 2026.</p>
+              {resultados
+                .filter((r) => r.elegivel)
+                .map((r) => (
+                  <details key={r.regime} className="group rounded-xl border border-pc-border" open={r === recomendado}>
+                    <summary className="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 text-[0.9375rem] font-semibold text-pc-text [&::-webkit-details-marker]:hidden">
+                      {NOME_REGIME[r.regime]}
+                      {r.simples ? <span className="ml-1.5 text-[0.8125rem] font-medium text-pc-muted">Anexo {r.simples.anexo}, faixa {r.simples.faixa}</span> : null}
+                      <span className="ml-auto text-[0.875rem] font-medium tabular-nums text-pc-text-2">{brl(r.totalGeralAnual)} / ano</span>
+                    </summary>
+                    <div className="border-t border-pc-border px-5 py-4">
+                      <table className="w-full text-[0.875rem]">
+                        <tbody>
+                          {r.linhas.map((l, i) => (
+                            <tr key={`${l.tributo}-${i}`} className="border-b border-pc-border/70 last:border-0">
+                              <td className="py-2 pr-3 text-pc-text-2">
+                                {NOME_TRIBUTO[l.tributo]}
+                                {l.nota ? <span className="block text-[0.75rem] text-pc-muted">{l.nota}</span> : null}
+                              </td>
+                              <td className="py-2 pr-3 text-right tabular-nums text-pc-muted">{l.sobreReceita > 0 ? pct(l.sobreReceita) : "—"}</td>
+                              <td className="py-2 text-right font-medium tabular-nums text-pc-text">{brl(l.valorAnual)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      <ol className="mt-4 flex flex-col gap-2 text-[0.8125rem] leading-relaxed text-pc-text-2">
+                        {r.memoria.map((m, i) => (
+                          <li key={i} className="flex gap-2.5">
+                            <span className="shrink-0 tabular-nums text-pc-muted">{i + 1}.</span>
+                            {m}
+                          </li>
+                        ))}
+                      </ol>
+                      {r.avisos.length ? (
+                        <ul className="mt-4 flex flex-col gap-2">
+                          {r.avisos.map((a) => (
+                            <li key={a} className="text-[0.8125rem] leading-relaxed text-pc-muted">• {a}</li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </div>
+                  </details>
+                ))}
+            </div>
+          ) : null}
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="rounded-2xl bg-pc-primary p-7 text-white md:p-9">
-        <h3 className="text-[1.5rem] font-bold tracking-[-0.015em] md:text-[1.75rem]">
-          Leve isto para a conversa. Com a sua marca.
-        </h3>
-        <p className="mt-2 max-w-[56ch] text-[0.9375rem] leading-relaxed text-white/85">
-          O PDF traz o comparativo, a memória de cálculo, a Reforma e os próximos passos. Se quiser que a Korium confirme o cenário com os seus números reais, é só mandar no WhatsApp.
-        </p>
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-          <Botao type="button" onClick={baixarPdf} disabled={gerando} className="bg-white text-pc-primary shadow-none hover:bg-pc-primary-soft">
-            {gerando ? <Loader2 className="animate-spin" /> : <Download />}
-            {gerando ? "Gerando o PDF…" : "Baixar o relatório em PDF"}
-          </Botao>
-          <a
-            href={whatsappLink(mensagemWhatsApp(comparativo, { empresa: empresa.nome || undefined, cnae: empresa.cnae?.cnae }))}
-            {...externalLinkProps}
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-white/40 px-5 text-[0.9375rem] font-semibold text-white transition-colors hover:bg-white/10 [&_svg]:size-4"
-          >
-            Falar com a Korium <ArrowUpRight />
-          </a>
+      {/* ------------------------------------------------------------ CTA */}
+      <section className="rounded-2xl bg-pc-text p-7 text-white md:p-9">
+        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h3 className="text-[1.375rem] font-bold tracking-[-0.015em] md:text-[1.625rem]">Leve isto para a conversa.</h3>
+            <p className="mt-1.5 max-w-[52ch] text-[0.9375rem] leading-relaxed text-white/75">
+              O PDF traz tudo o que está aqui, com a sua marca. Se quiser que a {site.name} confirme o cenário com os seus números reais, é só mandar.
+            </p>
+          </div>
+          <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
+            <Botao type="button" onClick={baixarPdf} disabled={gerando} className="bg-white text-pc-text shadow-none hover:bg-pc-bg">
+              {gerando ? <Loader2 className="animate-spin" /> : <Download />}
+              {gerando ? "Gerando…" : "Baixar o PDF"}
+            </Botao>
+            <a
+              href={whatsappLink(mensagemWhatsApp(comparativo, { empresa: empresa.nome || undefined, cnae: empresa.cnae?.cnae }))}
+              {...externalLinkProps}
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-pc-primary px-5 text-[0.9375rem] font-semibold text-white transition-colors hover:bg-pc-primary-hover [&_svg]:size-4"
+            >
+              {site.ctaLabel ?? "Falar com a Korium"} <ArrowUpRight />
+            </a>
+          </div>
         </div>
         {erroPdf ? <p className="mt-3 text-[0.8125rem] text-white/90">{erroPdf}</p> : null}
       </section>
@@ -238,27 +297,60 @@ export function Resultados({
   );
 }
 
-function Metrica({ rotulo, valor, destaque }: { rotulo: string; valor: string; destaque?: boolean }) {
+function Barras({ resultados, recomendado }: { resultados: ResultadoRegime[]; recomendado: ResultadoRegime | null }) {
+  const eleg = resultados.filter((r) => r.elegivel);
+  const max = Math.max(...eleg.map((r) => r.totalGeralAnual), 1);
   return (
-    <div className={cn("rounded-xl px-4 py-3.5", destaque ? "bg-pc-primary-soft" : "bg-pc-bg")}>
-      <div className="text-[0.75rem] font-medium text-pc-muted">{rotulo}</div>
-      <div className={cn("mt-1 text-[1.5rem] font-bold tabular-nums tracking-[-0.02em]", destaque ? "text-pc-primary" : "text-pc-text")}>
-        {valor}
-      </div>
+    <ul className="mt-4 flex flex-col gap-3">
+      {resultados.map((r) => {
+        const rec = r === recomendado;
+        const w = r.elegivel ? Math.max(3, (r.totalGeralAnual / max) * 100) : 0;
+        return (
+          <li key={r.regime}>
+            <div className="flex items-baseline justify-between gap-3 text-[0.8125rem]">
+              <span className={cn("font-medium", rec ? "text-pc-text" : "text-pc-text-2")}>
+                {NOME_REGIME[r.regime]}
+                {r.simples ? <span className="text-pc-muted"> · Anexo {r.simples.anexo}</span> : null}
+              </span>
+              <span className={cn("tabular-nums", r.elegivel ? (rec ? "font-bold text-pc-success" : "font-medium text-pc-text") : "text-pc-muted")}>
+                {r.elegivel ? brl(r.totalGeralAnual) : "não elegível"}
+              </span>
+            </div>
+            <div className="mt-1.5 h-2.5 overflow-hidden rounded-full bg-white ring-1 ring-pc-border">
+              <div
+                className={cn("h-full rounded-full transition-[width] duration-700", rec ? "bg-pc-success" : "bg-pc-primary/45")}
+                style={{ width: `${w}%` }}
+              />
+            </div>
+            {!r.elegivel && r.avisos[0] ? <p className="mt-1 text-[0.75rem] text-pc-muted">{r.avisos[0]}</p> : null}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+function Medidor({ valor, limite }: { valor: number; limite: number }) {
+  const max = Math.max(0.5, valor * 1.2);
+  const v = Math.min(100, (valor / max) * 100);
+  const l = (limite / max) * 100;
+  return (
+    <div className="relative h-3 w-full rounded-full bg-pc-bg ring-1 ring-pc-border">
+      <div className={cn("h-full rounded-full", valor >= limite ? "bg-pc-success" : "bg-pc-warning")} style={{ width: `${v}%` }} />
+      <div className="absolute -top-1 bottom-[-4px] w-0.5 bg-pc-text" style={{ left: `${l}%` }} aria-hidden />
+      <span className="absolute top-4 -translate-x-1/2 text-[0.6875rem] font-semibold text-pc-text" style={{ left: `${l}%` }}>
+        28 %
+      </span>
     </div>
   );
 }
 
-export function Titulo({ children }: { children: React.ReactNode }) {
-  return <h2 className="text-[1.125rem] font-semibold tracking-[-0.01em] text-pc-text">{children}</h2>;
-}
-
-export function Painel({ titulo, children }: { titulo: string; children: React.ReactNode }) {
+function Bloco({ titulo, children }: { titulo: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-2xl border border-pc-border bg-white p-6 md:p-7">
-      <Titulo>{titulo}</Titulo>
+    <div className="rounded-xl border border-pc-border p-5">
+      <h3 className="text-[1rem] font-semibold text-pc-text">{titulo}</h3>
       <div className="mt-3">{children}</div>
-    </section>
+    </div>
   );
 }
 
@@ -292,7 +384,7 @@ function CardRegime({ r, recomendado }: { r: ResultadoRegime; recomendado: boole
       className={cn(
         "relative flex flex-col rounded-xl border p-5",
         r.elegivel ? "border-pc-border bg-white" : "border-dashed border-pc-border bg-transparent",
-        recomendado && "border-pc-primary ring-[3px] ring-pc-primary/15",
+        recomendado && "border-pc-success ring-[3px] ring-pc-success/15",
       )}
     >
       <div className="flex items-start justify-between gap-3">
@@ -308,9 +400,9 @@ function CardRegime({ r, recomendado }: { r: ResultadoRegime; recomendado: boole
       </div>
       {r.elegivel ? (
         <>
-          <div className="mt-4 text-[1.625rem] font-bold tabular-nums tracking-[-0.02em] text-pc-text">{brl(r.totalGeralAnual)}</div>
+          <div className="mt-4 text-[1.5rem] font-bold tabular-nums tracking-[-0.02em] text-pc-text">{brl(r.totalGeralAnual / 12)}<span className="text-[0.875rem] font-medium text-pc-muted"> /mês</span></div>
           <div className="mt-0.5 text-[0.8125rem] text-pc-muted">
-            por ano · {brl(r.totalGeralAnual / 12)}/mês · {pct(r.cargaEfetiva, 1)} da receita
+            {brl(r.totalGeralAnual)} por ano · {pct(r.cargaEfetiva, 1)} da receita
           </div>
           {r.simples ? (
             <div className="mt-3 text-[0.8125rem] leading-relaxed text-pc-text-2">

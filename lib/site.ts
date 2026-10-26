@@ -10,6 +10,8 @@ export const site = {
   /** Human-readable form, for display only. */
   phone: "+55 31 97596-5032",
   serviceArea: "Atendimento em todo o Brasil",
+  /** Texto dos botões de conversa. */
+  ctaLabel: "Falar com a Korium",
 } as const;
 
 /* ------------------------------------------------------------------

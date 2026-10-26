@@ -7,6 +7,7 @@ import { Botao, Campo, Dinheiro, Entrada, Percentual, Selecao } from "@/componen
 import { carregar, CnaeBusca } from "@/components/planejador/cnae-busca";
 import { Resultados } from "@/components/planejador/resultados";
 import { classificarCnae, NOME_ATIVIDADE, type ClassificacaoCnae } from "@/lib/planejador/cnae";
+import { brl } from "@/lib/planejador/money";
 import { simular, type Comparativo } from "@/lib/planejador/simular";
 import type { Atividade, EntradaSimulacao } from "@/lib/planejador/types";
 import { cn } from "@/lib/utils";
@@ -33,9 +34,9 @@ type Form = {
 };
 
 const INICIAL: Form = {
-  receitaMensal: 30_000,
+  receitaMensal: 0,
   folhaMensal: 0,
-  proLaboreMensal: 3_000,
+  proLaboreMensal: 0,
   socios: 1,
   empregados: 0,
   issMunicipal: 0.05,
@@ -56,28 +57,36 @@ const ATIVIDADES_MANUAIS: Atividade[] = [
   "locacao_bens_moveis",
 ];
 
-function Passo({ n, titulo, extra }: { n: number; titulo: string; extra?: string }) {
-  return (
-    <span className="flex items-center gap-2.5">
-      <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-pc-primary text-[0.75rem] font-bold text-white">
-        {n}
-      </span>
-      <span className="text-[0.9375rem] font-semibold text-pc-text">{titulo}</span>
-      {extra ? <span className="text-[0.8125rem] font-normal text-pc-muted">{extra}</span> : null}
-    </span>
-  );
-}
+const CHIPS_RECEITA = [10_000, 20_000, 30_000, 50_000, 100_000];
+const CHIPS_PRO_LABORE = [1_621, 3_000, 5_000, 10_000];
 
-/** Seção opcional, fechada por padrão: o formulário fica curto para quem só quer o essencial. */
-function SecaoOpcional({ n, titulo, extra, children }: { n: number; titulo: string; extra: string; children: React.ReactNode }) {
+function Chips({
+  valores,
+  atual,
+  onPick,
+}: {
+  valores: number[];
+  atual: number;
+  onPick: (v: number) => void;
+}) {
   return (
-    <details className="group border-t border-pc-border pt-5">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 [&::-webkit-details-marker]:hidden">
-        <Passo n={n} titulo={titulo} extra={extra} />
-        <ChevronDown className="size-4 shrink-0 text-pc-muted transition-transform group-open:rotate-180" aria-hidden />
-      </summary>
-      <div className="mt-4 flex flex-col gap-4">{children}</div>
-    </details>
+    <div className="mt-2 flex flex-wrap gap-1.5">
+      {valores.map((v) => (
+        <button
+          key={v}
+          type="button"
+          onClick={() => onPick(v)}
+          className={cn(
+            "rounded-full border px-2.5 py-1 text-[0.75rem] font-medium transition-colors",
+            atual === v
+              ? "border-pc-primary bg-pc-primary-soft text-pc-primary"
+              : "border-pc-border bg-white text-pc-text-2 hover:border-pc-border-strong hover:text-pc-text",
+          )}
+        >
+          {v >= 1000 ? `${Math.round(v / 1000)} mil` : brl(v)}
+        </button>
+      ))}
+    </div>
   );
 }
 
@@ -87,6 +96,7 @@ export function Planejador() {
   const [comparativo, setComparativo] = React.useState<Comparativo | null>(null);
   const [erroLogo, setErroLogo] = React.useState<string | null>(null);
   const [carregandoExemplo, setCarregandoExemplo] = React.useState(false);
+  const [tentou, setTentou] = React.useState(false);
   const resultadosRef = React.useRef<HTMLDivElement>(null);
 
   const set = <K extends keyof Form>(k: K, v: Form[K]) => setForm((f) => ({ ...f, [k]: v }));
@@ -121,8 +131,12 @@ export function Planejador() {
     );
   }
 
+  const faltaReceita = form.receitaMensal <= 0;
+
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setTentou(true);
+    if (faltaReceita) return;
     setComparativo(simular(entrada(form, empresa)));
     rolarParaResultados();
   }
@@ -166,100 +180,148 @@ export function Planejador() {
     form.atividade !== "industria" &&
     form.atividade !== "locacao_bens_moveis";
 
+  const passoAtividade = Boolean(empresa.cnae);
+  const passoNumeros = form.receitaMensal > 0;
+
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,25rem)_minmax(0,1fr)] lg:items-start lg:gap-8">
+    <>
+      {/* ------------------------------------------------------------ formulário essencial */}
       <form
         onSubmit={onSubmit}
-        className="rounded-2xl border border-pc-border bg-white p-5 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_8px_24px_-12px_rgba(15,23,42,0.12)] md:p-6 lg:sticky lg:top-24"
+        className="rounded-2xl border border-pc-border bg-white p-5 shadow-[0_24px_60px_-24px_rgba(15,23,42,0.35)] md:p-7"
       >
-        <div className="flex flex-col gap-5">
-          <fieldset className="flex flex-col gap-4">
-            <legend className="mb-4">
-              <Passo n={1} titulo="O que a empresa faz" />
-            </legend>
-            <Campo label="Atividade principal (CNAE)" hint="Busque por palavra ou código. Define o anexo do Simples e a presunção do Presumido.">
+        <ol className="mb-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.8125rem] font-medium">
+          {[
+            ["Atividade", passoAtividade],
+            ["Números do mês", passoNumeros],
+            ["Resultado", Boolean(comparativo)],
+          ].map(([t, ok], i) => (
+            <li key={String(t)} className="inline-flex items-center gap-2">
+              <span
+                className={cn(
+                  "flex size-5 items-center justify-center rounded-full text-[0.6875rem] font-bold",
+                  ok ? "bg-pc-success text-white" : "bg-pc-bg text-pc-muted ring-1 ring-pc-border",
+                )}
+              >
+                {ok ? "✓" : i + 1}
+              </span>
+              <span className={ok ? "text-pc-text" : "text-pc-muted"}>{t}</span>
+            </li>
+          ))}
+        </ol>
+
+        <div className="grid gap-4 md:grid-cols-12 md:gap-5">
+          <div className="md:col-span-12 lg:col-span-5">
+            <Campo
+              label="O que a empresa faz"
+              hint={
+                empresa.cnae
+                  ? undefined
+                  : "Digite como você diria: dentista, loja de roupas, programador. Ou o código CNAE."
+              }
+            >
               <CnaeBusca valor={empresa.cnae} onChange={escolherCnae} />
             </Campo>
             {!empresa.cnae ? (
-              <Campo label="Ou escolha a natureza da atividade">
-                <Selecao value={form.atividade} onChange={(e) => set("atividade", e.target.value as Atividade)}>
+              <div className="mt-2">
+                <Selecao
+                  value={form.atividade}
+                  onChange={(e) => set("atividade", e.target.value as Atividade)}
+                  aria-label="Ou escolha a natureza da atividade"
+                  className="h-9 text-[0.8125rem] md:text-[0.8125rem]"
+                >
                   {ATIVIDADES_MANUAIS.map((a) => (
                     <option key={a} value={a}>
                       {NOME_ATIVIDADE[a]}
                     </option>
                   ))}
                 </Selecao>
-              </Campo>
+              </div>
             ) : empresa.cnae.nota ? (
-              <p className="rounded-[10px] bg-pc-bg px-3.5 py-3 text-[0.8125rem] leading-relaxed text-pc-text-2">{empresa.cnae.nota}</p>
+              <p className="mt-2 text-[0.75rem] leading-relaxed text-pc-muted">{empresa.cnae.nota}</p>
             ) : null}
-            <label className="flex items-center gap-2.5 text-[0.875rem] text-pc-text-2">
+          </div>
+
+          <div className="md:col-span-4 lg:col-span-3">
+            <Campo label="Faturamento por mês">
+              <Dinheiro
+                value={form.receitaMensal}
+                onChange={(v) => set("receitaMensal", v)}
+                placeholder="30.000"
+                aria-invalid={tentou && faltaReceita}
+                className={cn(tentou && faltaReceita && "border-pc-danger ring-[3px] ring-pc-danger/15")}
+              />
+            </Campo>
+            <Chips valores={CHIPS_RECEITA} atual={form.receitaMensal} onPick={(v) => set("receitaMensal", v)} />
+            {tentou && faltaReceita ? (
+              <p className="mt-1.5 text-[0.75rem] font-medium text-pc-danger">Informe o faturamento para calcular.</p>
+            ) : null}
+          </div>
+
+          <div className="md:col-span-4 lg:col-span-2">
+            <Campo label="Pró-labore por mês" hint="O que os sócios retiram.">
+              <Dinheiro value={form.proLaboreMensal} onChange={(v) => set("proLaboreMensal", v)} placeholder="3.000" />
+            </Campo>
+            <Chips valores={CHIPS_PRO_LABORE} atual={form.proLaboreMensal} onPick={(v) => set("proLaboreMensal", v)} />
+          </div>
+
+          <div className="md:col-span-4 lg:col-span-2">
+            <Campo label="Folha por mês" hint="Salários com encargos. Zero se não tem.">
+              <Dinheiro value={form.folhaMensal} onChange={(v) => set("folhaMensal", v)} placeholder="0" />
+            </Campo>
+          </div>
+        </div>
+
+        <details className="group mt-5 rounded-xl border border-pc-border bg-pc-bg/60">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-[0.875rem] font-semibold text-pc-text [&::-webkit-details-marker]:hidden">
+            <span>
+              Mais opções{" "}
+              <span className="font-normal text-pc-muted">sócios, empregados, ISS, margem, nome e logo para o PDF</span>
+            </span>
+            <ChevronDown className="size-4 shrink-0 text-pc-muted transition-transform group-open:rotate-180" aria-hidden />
+          </summary>
+          <div className="grid gap-4 border-t border-pc-border px-4 py-4 sm:grid-cols-2 lg:grid-cols-4">
+            <Campo label="Sócios">
+              <Entrada type="number" min={1} max={50} value={form.socios} onChange={(e) => set("socios", Math.max(1, Number(e.target.value) || 1))} />
+            </Campo>
+            <Campo label="Empregados">
+              <Entrada type="number" min={0} max={500} value={form.empregados} onChange={(e) => set("empregados", Math.max(0, Number(e.target.value) || 0))} />
+            </Campo>
+            {servico ? (
+              <Campo label="ISS do município" hint="2 % a 5 %. Em dúvida, 5 %.">
+                <Percentual value={form.issMunicipal} onChange={(v) => set("issMunicipal", Math.min(0.05, Math.max(0, v)))} />
+              </Campo>
+            ) : null}
+            <Campo label="Margem de lucro" hint="Só muda o Lucro Real.">
+              <Percentual value={form.margemLucro} onChange={(v) => set("margemLucro", Math.min(1, Math.max(0, v)))} />
+            </Campo>
+            <Campo label="Compras com crédito" hint="Insumos de empresas, % da receita.">
+              <Percentual value={form.custosComCredito} onChange={(v) => set("custosComCredito", Math.min(1, Math.max(0, v)))} />
+            </Campo>
+            <Campo label="Vendas para empresas" hint="Clientes PJ, % da receita. Pesa na Reforma.">
+              <Percentual value={form.vendasParaEmpresas} onChange={(v) => set("vendasParaEmpresas", Math.min(1, Math.max(0, v)))} />
+            </Campo>
+            <label className="flex items-center gap-2.5 self-end pb-2 text-[0.875rem] text-pc-text-2">
               <input
                 type="checkbox"
                 checked={form.inicioAtividade}
                 onChange={(e) => set("inicioAtividade", e.target.checked)}
                 className="size-4 rounded accent-pc-primary"
               />
-              Empresa nova (ainda vou abrir ou abri este ano)
+              Empresa nova (abri ou vou abrir este ano)
             </label>
-          </fieldset>
-
-          <fieldset className="flex flex-col gap-4 border-t border-pc-border pt-5">
-            <legend className="mb-4">
-              <Passo n={2} titulo="Números por mês" />
-            </legend>
-            <Campo label="Faturamento mensal" hint="Receita bruta média. Usamos 12 × este valor no ano.">
-              <Dinheiro value={form.receitaMensal} onChange={(v) => set("receitaMensal", v)} />
-            </Campo>
-            <div className="grid grid-cols-2 gap-3">
-              <Campo label="Pró-labore (sócios)">
-                <Dinheiro value={form.proLaboreMensal} onChange={(v) => set("proLaboreMensal", v)} />
-              </Campo>
-              <Campo label="Folha de empregados" hint="Com encargos, sem pró-labore.">
-                <Dinheiro value={form.folhaMensal} onChange={(v) => set("folhaMensal", v)} />
-              </Campo>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              <Campo label="Sócios">
-                <Entrada type="number" min={1} max={50} value={form.socios} onChange={(e) => set("socios", Math.max(1, Number(e.target.value) || 1))} />
-              </Campo>
-              <Campo label="Empregados">
-                <Entrada type="number" min={0} max={500} value={form.empregados} onChange={(e) => set("empregados", Math.max(0, Number(e.target.value) || 0))} />
-              </Campo>
-            </div>
-          </fieldset>
-
-          <SecaoOpcional n={3} titulo="Ajustes finos" extra="opcional">
-            <div className="grid grid-cols-2 gap-3">
-              {servico ? (
-                <Campo label="ISS do município" hint="2 % a 5 %. Em dúvida, 5 %.">
-                  <Percentual value={form.issMunicipal} onChange={(v) => set("issMunicipal", Math.min(0.05, Math.max(0, v)))} />
-                </Campo>
-              ) : null}
-              <Campo label="Margem de lucro" hint="Só muda o Lucro Real.">
-                <Percentual value={form.margemLucro} onChange={(v) => set("margemLucro", Math.min(1, Math.max(0, v)))} />
-              </Campo>
-              <Campo label="Compras com crédito" hint="Insumos de empresas, % da receita.">
-                <Percentual value={form.custosComCredito} onChange={(v) => set("custosComCredito", Math.min(1, Math.max(0, v)))} />
-              </Campo>
-              <Campo label="Vendas para empresas" hint="Clientes PJ, % da receita. Pesa na Reforma.">
-                <Percentual value={form.vendasParaEmpresas} onChange={(v) => set("vendasParaEmpresas", Math.min(1, Math.max(0, v)))} />
-              </Campo>
-            </div>
-          </SecaoOpcional>
-
-          <SecaoOpcional n={4} titulo="Para o PDF" extra="nome e logo, opcional">
-            <Campo label="Nome da empresa">
+            <Campo label="Nome da empresa (para o PDF)">
               <Entrada
                 type="text"
                 maxLength={80}
-                placeholder="Como deve aparecer no relatório"
+                placeholder="Como deve aparecer"
                 value={empresa.nome}
                 onChange={(e) => setEmpresa((em) => ({ ...em, nome: e.target.value }))}
               />
             </Campo>
             <Campo
-              label="Logo da empresa"
+              label="Logo (para o PDF)"
+              className="sm:col-span-2 lg:col-span-4"
               hint={
                 <span className="inline-flex items-center gap-1">
                   <Lock className="size-3" aria-hidden /> Fica só no seu navegador. Nada é enviado.
@@ -267,9 +329,9 @@ export function Planejador() {
               }
             >
               {empresa.logo ? (
-                <div className="flex items-center gap-4 rounded-[10px] border border-pc-border bg-pc-bg p-3">
+                <div className="flex items-center gap-4 rounded-[10px] border border-pc-border bg-white p-3">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={empresa.logo} alt="" className="h-12 max-w-[9rem] object-contain" />
+                  <img src={empresa.logo} alt="" className="h-10 max-w-[9rem] object-contain" />
                   <button
                     type="button"
                     onClick={() => setEmpresa((e) => ({ ...e, logo: null }))}
@@ -279,12 +341,7 @@ export function Planejador() {
                   </button>
                 </div>
               ) : (
-                <span
-                  className={cn(
-                    "flex h-16 cursor-pointer items-center justify-center gap-2 rounded-[10px] border border-dashed border-pc-border-strong bg-pc-bg text-[0.875rem] font-medium text-pc-text-2",
-                    "transition-colors hover:border-pc-primary hover:bg-pc-primary-soft hover:text-pc-primary",
-                  )}
-                >
+                <span className="flex h-12 cursor-pointer items-center justify-center gap-2 rounded-[10px] border border-dashed border-pc-border-strong bg-white text-[0.875rem] font-medium text-pc-text-2 transition-colors hover:border-pc-primary hover:text-pc-primary">
                   <ImagePlus className="size-4" /> Enviar imagem
                   <input
                     type="file"
@@ -296,58 +353,49 @@ export function Planejador() {
               )}
               {erroLogo ? <span className="text-[0.75rem] text-pc-danger">{erroLogo}</span> : null}
             </Campo>
-          </SecaoOpcional>
+          </div>
+        </details>
 
-          <div className="flex flex-col gap-2.5 border-t border-pc-border pt-5">
-            <Botao type="submit" className="w-full">
-              Comparar os regimes <ArrowRight />
+        <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-[0.75rem] leading-relaxed text-pc-muted">
+            Tabelas de 2026. Estimativa educativa: não substitui a análise de um contador.
+          </p>
+          <div className="flex flex-col gap-2 sm:flex-row">
+            {!comparativo ? (
+              <Botao type="button" variante="secundario" onClick={exemplo} disabled={carregandoExemplo} className="h-12">
+                <Sparkles className="text-pc-primary" /> {carregandoExemplo ? "Carregando…" : "Ver um exemplo"}
+              </Botao>
+            ) : null}
+            <Botao type="submit" className="h-12 px-7">
+              {comparativo ? "Recalcular" : "Comparar os regimes"} <ArrowRight />
             </Botao>
-            <p className="text-center text-[0.75rem] leading-relaxed text-pc-muted">
-              Estimativa com as tabelas de 2026. Não substitui a análise de um contador.
-            </p>
           </div>
         </div>
       </form>
 
-      <div ref={resultadosRef} className="min-w-0 scroll-mt-24">
-        {comparativo ? (
-          <Resultados comparativo={comparativo} empresa={empresa} />
-        ) : (
-          <Vazio onExemplo={exemplo} carregando={carregandoExemplo} />
-        )}
+      {/* ------------------------------------------------------------ resultado */}
+      <div ref={resultadosRef} className="mt-10 scroll-mt-24 md:mt-14">
+        {comparativo ? <Resultados comparativo={comparativo} empresa={empresa} /> : <Guia />}
       </div>
-    </div>
+    </>
   );
 }
 
-function Vazio({ onExemplo, carregando }: { onExemplo: () => void; carregando: boolean }) {
-  const itens = [
-    ["MEI, Simples, Presumido e Real", "Quanto cada um custa por ano, com os encargos de folha incluídos."],
-    ["Anexo e Fator R", "Em qual anexo o seu CNAE cai e quanto de folha mudaria o jogo."],
-    ["Reforma Tributária", "O custo de cada caminho de 2027 a 2033, ano a ano."],
-    ["PDF com a sua marca", "Para guardar ou levar ao seu contador."],
+function Guia() {
+  const passos = [
+    ["1", "Diga o que a empresa faz", "A atividade define o anexo do Simples e a presunção do Lucro Presumido. É a pergunta que mais muda o imposto."],
+    ["2", "Informe faturamento, pró-labore e folha", "Três números por mês bastam. Pró-labore e folha decidem o Fator R, que pode cortar o imposto quase pela metade."],
+    ["3", "Compare e leve o resultado", "MEI, Simples, Presumido e Real lado a lado, com o porquê. Baixe o PDF com a sua marca ou mande para a gente conferir."],
   ];
   return (
-    <div className="flex min-h-[28rem] flex-col justify-center rounded-2xl border border-dashed border-pc-border-strong bg-white/60 p-7 md:p-10">
-      <h2 className="text-[1.375rem] font-semibold tracking-[-0.01em] text-pc-text md:text-[1.625rem]">
-        Preencha ao lado. O resultado aparece aqui.
-      </h2>
-      <p className="mt-2 text-[0.9375rem] text-pc-text-2">
-        Leva um minuto. Se preferir ver antes como fica, carregue um exemplo.
-      </p>
-      <div className="mt-5">
-        <Botao type="button" variante="secundario" onClick={onExemplo} disabled={carregando} className="h-11">
-          <Sparkles className="text-pc-primary" /> {carregando ? "Carregando…" : "Ver um exemplo: clínica odontológica"}
-        </Botao>
-      </div>
-      <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-        {itens.map(([t, d]) => (
-          <li key={t} className="rounded-xl border border-pc-border bg-white p-4">
-            <div className="text-[0.9375rem] font-semibold text-pc-text">{t}</div>
-            <div className="mt-1 text-[0.875rem] leading-relaxed text-pc-text-2">{d}</div>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <section aria-label="Como funciona" className="grid gap-4 md:grid-cols-3">
+      {passos.map(([n, t, d]) => (
+        <div key={n} className="rounded-2xl border border-pc-border bg-white p-6">
+          <span className="text-[2rem] font-bold leading-none tracking-[-0.03em] text-pc-primary/30">{n}</span>
+          <h2 className="mt-3 text-[1.0625rem] font-semibold text-pc-text">{t}</h2>
+          <p className="mt-1.5 text-[0.9rem] leading-relaxed text-pc-text-2">{d}</p>
+        </div>
+      ))}
+    </section>
   );
 }
